@@ -1,0 +1,4 @@
+.networkGraph {
+    overflow: hidden; /* ensures no overflow */
+    position: relative; /* necessary for zoom functionality */
+}

@@ -1,0 +1,11 @@
+<template>
+    <div class="qa-status">
+        <!-- If Manual QA is true/yes, show tick; otherwise, show cross -->
+        <template if:true={isManualQA}>
+            <lightning-icon icon-name="utility:check" alternative-text="QA Passed" class="qa-tick"></lightning-icon>
+        </template>
+        <template if:false={isManualQA}>
+            <lightning-icon icon-name="utility:close" alternative-text="QA Failed" class="qa-cross"></lightning-icon>
+        </template>
+    </div>
+</template>

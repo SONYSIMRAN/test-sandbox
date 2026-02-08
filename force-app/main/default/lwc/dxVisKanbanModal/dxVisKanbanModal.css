@@ -1,0 +1,30 @@
+.orange {
+    --slds-c-modal-header-color-background: #fd7e14;
+    --slds-c-modal-header-color-border: #fd7e14;
+    --slds-c-modal-header-color-color: #212529;
+    background-color: #fd7e14;
+    color: #212529;
+}
+.lime-green {
+    --slds-c-modal-header-color-background: #68d168;
+    --slds-c-modal-header-color-border: #68d168;
+    --slds-c-modal-header-color-color: #212529;
+    background-color: #68d168;
+    color: #212529;
+}
+.magenta {
+    --slds-c-modal-header-color-background: #d105d1;
+    --slds-c-modal-header-color-border: #d105d1;
+    --slds-c-modal-header-color-color: #fff;
+    background-color: #d105d1;
+    color: #fff;
+}
+.b-orange {
+    border: 1px solid #ca6510 !important;
+}
+.b-lime-green {
+    border: 1px solid #146c43 !important;
+}
+.b-magenta {
+    border: 1px solid #ab296a !important;
+}

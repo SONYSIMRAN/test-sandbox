@@ -1,0 +1,44 @@
+<template>
+    <template lwc:if={tokenValid}>
+        <div class="bg-light dxAppPage">
+            <lightning-spinner if:true={isLoading}></lightning-spinner>
+            <template if:true={isDataLoaded}>
+                <c-dx-header  package-data={packageData} card-view={cardView} kanban-view={kanbanView} list-view={listView}
+                    button-package-dep={buttonPackageDep} button-sandbox-code-size={buttonSandboxCodeSize} 
+                    selected-sandbox={selectedSandbox} sandbox-options={sandboxOptions}  onsandboxchange={handleSandboxChange}
+                    button-metrics-dashboard={buttonMetricsDashboard} button-package-sorting={buttonPackageSorting}
+                    select-sandbox={selectSandbox} sandbox-list={sandboxList} onchildmethod={getSandbox}
+                    onpackagesorting={packageSorting} onselectedsourcechange={handleSelectedSourceChange} labels={labels}></c-dx-header>
+            </template>
+            <!-- Body section -->
+            <div class="container my-3">
+                <!-- <template lwc:if={isSalesforceUser}>
+                    <div class="slds-grid slds-grid-wrap">
+                        <div class="slds-col">
+                            <div class="slds-m-right_x-small">
+                                <c-dx-sandbox-dropdown sandbox-options={sandboxOptions}
+                                    selected-sandbox={selectedSandbox} onsandboxchange={handleSandboxChange}>
+                                </c-dx-sandbox-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                </template> -->
+                <template if:true={result}>
+                    <c-dx-package sf-user={isSalesforceUser} packages={result}></c-dx-package>
+                </template>
+            </div>
+            <!-- Body Section -->
+
+            <!-- Footer Section -->
+            <template lwc:if={isSalesforceUser}>
+                <c-sfdx-footer></c-sfdx-footer>
+            </template>
+            <template lwc:else>
+                <c-dx-footer></c-dx-footer>
+            </template>
+        </div>
+    </template>
+    <template lwc:else>
+        <c-dx-vis-error-template></c-dx-vis-error-template>
+    </template>
+</template>

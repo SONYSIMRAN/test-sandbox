@@ -1,0 +1,89 @@
+<template>
+    <template if:true={coverageListLoader}>
+        <c-dx-vis-loader></c-dx-vis-loader>
+    </template>
+    <template lwc:if={coverageList}>
+        <div class="card-container">
+            <template for:each={coverageList} for:item="item">
+                <div key={item.name} class="card custom-shadow">
+                    <div class="card-header">
+                        <h5 class="text-truncate" title={item.name}>{item.name}</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mt-2 mb-3">
+                            <!-- <ProgressBar value="coveragePercentage" showValue="coveragePercentage"/> -->
+                            <c-dx-progress-utils width="100%" custom-progress={customProgress}
+                                percentage={item.coveragePercentage}></c-dx-progress-utils>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center"><strong
+                                    class="text-nowrap me-1 small text-secondary">Num Lines Covered:</strong>
+                                {item.NumLinesCovered}</li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center"><strong
+                                    class="text-nowrap me-1 small text-secondary">Num Lines Uncovered:</strong>
+                                {item.NumLinesUncovered}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <div class="footer-container">
+                            <div class="text-truncate" style="max-width: 100px;">
+                                <template lwc:if={item.git}>
+                                    <template lwc:if={item.git.author}>
+                                        <span class="text-truncate" title={item.git.author}>
+                                            {item.git.author}
+                                        </span>
+                                    </template>
+                                </template>
+                            </div>
+                            <div>
+                                <a href="`mailto:${item.git.email}`" title="email">
+                                    <svg fill="#255b85" height="25px" width="25px" version="1.1" id="Capa_1"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.294 75.294"
+                                        xml:space="preserve">
+                                        <g>
+                                            <path
+                                                d="M66.097,12.089h-56.9C4.126,12.089,0,16.215,0,21.286v32.722c0,5.071,4.126,9.197,9.197,9.197h56.9
+                                       c5.071,0,9.197-4.126,9.197-9.197V21.287C75.295,16.215,71.169,12.089,66.097,12.089z M61.603,18.089L37.647,33.523L13.691,18.089
+                                       H61.603z M66.097,57.206h-56.9C7.434,57.206,6,55.771,6,54.009V21.457l29.796,19.16c0.04,0.025,0.083,0.042,0.124,0.065
+                                       c0.043,0.024,0.087,0.047,0.131,0.069c0.231,0.119,0.469,0.215,0.712,0.278c0.025,0.007,0.05,0.01,0.075,0.016
+                                       c0.267,0.063,0.537,0.102,0.807,0.102c0.001,0,0.002,0,0.002,0c0.002,0,0.003,0,0.004,0c0.27,0,0.54-0.038,0.807-0.102
+                                       c0.025-0.006,0.05-0.009,0.075-0.016c0.243-0.063,0.48-0.159,0.712-0.278c0.044-0.022,0.088-0.045,0.131-0.069
+                                       c0.041-0.023,0.084-0.04,0.124-0.065l29.796-19.16v32.551C69.295,55.771,67.86,57.206,66.097,57.206z" />
+                                        </g>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="footer-container">
+                            <template lwc:if={item.git}>
+                                <template lwc:if={item.git.commitId}>
+                                    <div class="text-truncate" style="max-width: 80px;" title={item.git.commitId}>
+                                        <a href="`https://github.com/allegis-is-connected/${item.packageName}/commit/${item.git.commitId}`"
+                                            target="_blank" rel="noreferrer">
+                                            <svg fill="#237d1e" width="25px" height="25px" viewBox="0 0 32 32"
+                                                version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                                <title>commit</title>
+                                                <path
+                                                    d="M0 16q0 0.832 0.576 1.44t1.44 0.576h8.352q0.64 1.792 2.176 2.88t3.456 1.12q1.952 0 3.488-1.12t2.144-2.88h8.384q0.8 0 1.408-0.576t0.576-1.44-0.576-1.408-1.408-0.576h-8.384q-0.608-1.76-2.144-2.88t-3.488-1.12q-1.92 0-3.456 1.12t-2.176 2.88h-8.352q-0.832 0-1.44 0.576t-0.576 1.408zM14.016 16q0-0.832 0.576-1.408t1.408-0.576 1.408 0.576 0.608 1.408-0.608 1.44-1.408 0.576-1.408-0.576-0.576-1.44z">
+                                                </path>
+                                            </svg>
+                                            <code>{item.git.commitId}</code>
+                                        </a>
+                                    </div>
+                                </template>
+                            </template>
+                            <div>
+                                <template lwc:if={item.git}>
+                                    <template lwc:if={item.git.date}>
+                                        {item.git.date}
+                                    </template>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </template>
+</template>

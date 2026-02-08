@@ -1,0 +1,123 @@
+<template>
+    <div class="card-container">
+        <div class="row">
+            <div class="col-6">
+                <div class="badge rounded-pill bg-info text-dark text-uppercase fs-6 px-4">Single user test</div>
+            </div>
+            <div class="col-6">
+                <div class="float-end">
+                    <div class="d-flex">
+                        <lightning-combobox style="min-width: 100px;" name="sutFilter" label="Filter By" value={value} placeholder="Status"
+                            options={filterOptions} onchange={handleChangeSingleUser}></lightning-combobox>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Transaction Name</th>
+                        <th>Transaction Response Time</th>
+                        <th>TimeStamp</th>
+                        <th>SLA</th>
+                        <th>Results</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template if:true={singleUserTabLoader}>
+                        <tr>
+                            <td colspan="5">
+                                <c-dx-vis-loader></c-dx-vis-loader>
+                            </td>
+                        </tr>
+                    </template>
+                    <template lwc:if={singleUsertest}>
+                        <template for:each={singleUsertest} for:item="item">
+                            <tr key={item.TimeStamp}>
+                                <td>{item.TransactionName}</td>
+                                <td>{item.TransactionResponseTime}</td>
+                                <td>{item.TimeStamp}</td>
+                                <td>{item.SLA}</td>
+                                <td>
+                                    <c-dx-vis-tab-performance-status-child result={item.Results}>
+                                    </c-dx-vis-tab-performance-status-child>
+                                </td>
+                            </tr>
+                        </template>
+                    </template>
+                    <template if:true={singleUserNoData}>
+                        <tr>
+                            <td colspan="5">
+                                <c-dx-vis-no-data message="No Data Available"></c-dx-vis-no-data>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="badge rounded-pill bg-info text-dark text-uppercase fs-6 px-4">Partial test</div>
+            </div>
+            <div class="col-6">
+                <div class="float-end">
+                    <div class="d-flex">
+                        <lightning-combobox style="min-width: 100px;" name="partialFilter" label="Filter By" value={value}
+                            placeholder="Status" options={filterOptions}
+                            onchange={handleChangePartial}></lightning-combobox>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th style="width: 100px">Transaction Name</th>
+                        <th style="width: 150px">Package Name</th>
+                        <th>Min</th>
+                        <th>Max</th>
+                        <th>Average</th>
+                        <th>Percent90</th>
+                        <th>SLA</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template if:true={partialTestTabLoader}>
+                        <tr>
+                            <td colspan="8">
+                                <c-dx-vis-loader></c-dx-vis-loader>
+                            </td>
+                        </tr>
+                    </template>
+                    <template lwc:if={partialTest}>
+                        <template for:each={partialTest} for:item="partial">
+                            <tr key={partial.SLA}>
+                                <td style="width: 100px">{partial.TransactionName}</td>
+                                <td style="width: 150px">{partial.packageName}</td>
+                                <td>{partial.Min}</td>
+                                <td>{partial.Max}</td>
+                                <td>{partial.Average}</td>
+                                <td>{partial.Percent90}</td>
+                                <td>{partial.SLA}</td>
+                                <td>
+                                    <c-dx-vis-tab-performance-status-child result={partial.Result}>
+                                    </c-dx-vis-tab-performance-status-child>
+                                </td>
+                            </tr>
+                        </template>
+                    </template>
+                    <template if:true={partialNoData}>
+                        <tr>
+                            <td colspan="8">
+                                <c-dx-vis-no-data message="No Data Available"></c-dx-vis-no-data>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>

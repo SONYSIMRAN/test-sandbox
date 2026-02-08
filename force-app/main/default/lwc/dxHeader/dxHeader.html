@@ -1,0 +1,107 @@
+<template>
+    <!-- Header Section -->
+    <c-dx-vis-search-header></c-dx-vis-search-header>
+    <template if:false={hideParent}>
+        <div class="container py-2">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex">
+                    <div role="group" class="btn-group">
+                        <template if:true={cardView}>
+                            <button type="button" data-id="card" title="Card View" onclick={navigateToCardsView}
+                                class="btn-landing-action me-1 rounded btn btn-outline-secondary">
+                                <img alt="Tiles View" src={iconTilesView}>
+                            </button>
+                        </template>
+                        <template if:true={kanbanView}>
+                            <button type="button" data-id="kanban" title="Kanban View" onclick={handleKanbanViewClick}
+                                class="btn-landing-action me-1 rounded btn btn-outline-secondary bg-light bg-gradient">
+                                <img alt="" src={iconKanbanView}>
+                            </button>
+                        </template>
+                        <template if:true={listView}>
+                            <button type="button" data-id="list" title="List View" onclick={handleListViewClick}
+                                class="btn-landing-action me-1 rounded btn btn-outline-secondary bg-light bg-gradient">
+                                <img alt="" src={iconListView}>
+                            </button>
+                        </template>
+                    </div>
+                    <div class="mx-3">
+                        <div role="group" class="btn-group">
+                            <template if:true={buttonPackageDep}>
+                                <button type="button" data-id="list" title="Package Dependency"
+                                    data-sandbox={getSelectedSandbox} onclick={handlePackageDependency}
+                                    class="btn-landing-action me-1 rounded btn btn-outline-secondary bg-light bg-gradient"><img
+                                        src={iconPackageDepView} alt="Package Dependency">
+                                </button>
+                            </template>
+                            <template if:true={buttonSandboxCodeSize}>
+                                <button type="button" data-id="list" data-sandbox={getSelectedSandbox}
+                                    title="Sandbox Code Size" onclick={handleSandboxCodeSizeGraph}
+                                    class="btn-landing-action me-1 rounded btn btn-outline-secondary bg-light bg-gradient"><img
+                                        src={iconCodeSizeView} alt="Sandbox Code Size">
+                                </button>
+                            </template>
+                            <template if:true={buttonPackageSorting}>
+                                <div
+                                    class="btn-landing-action dropdown-sort-packages me-1 rounded p-0 dropdown bg-light bg-gradient">
+                                    <lightning-button-menu alternative-text="Sort packages"
+                                        class="sort-packages-button">
+                                        <lightning-menu-item data-id="desc" value="desc" onclick={sortpackages}
+                                        label={labels.sortDesc}></lightning-menu-item>
+                                        <lightning-menu-item data-id="asc" value="asc" onclick={sortpackages}
+                                        label={labels.sortAsc}></lightning-menu-item>
+                                    </lightning-button-menu>
+                                </div>
+                            </template>
+                            <template if:true={buttonMetricsDashboard}>
+                                <button type="button" data-id="list" title="Metrics Dashboard" onclick={navigateToMetricsDashboard}
+                                    class="btn-landing-action me-1 rounded btn btn-outline-secondary bg-light bg-gradient">
+                                <lightning-icon icon-name='utility:metrics' alternative-text="Metrics Dashboard" variant='success' size="small" title="Metrics Dashboard"></lightning-icon>
+                            </button>
+                            </template>
+                            <template if:true={buttonPackageEnvStatus}>
+                                <button type="button" data-id="list" title="Env Gate Dashboard" onclick={handlePackageEnvStatus}
+                                    class="btn-landing-action me-1 rounded btn btn-outline-secondary bg-light bg-gradient"><img
+                                        src={iconPackageEnvStatus} alt="Env Gate Dashboard">
+                                </button>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <!-- Dropdowns Section -->
+                <template if:true={isSalesforceUser}>
+                    <!-- Salesforce User Dropdown -->
+                    <template if:true={selectSandbox}>
+                        <!-- <div class="filter-section me-2"> -->
+                            <c-dx-sandbox-dropdown sandbox-options={sandboxOptions} style="width: 150px; margin-top: -24px;"
+                                selected-sandbox={selectedSandbox} onsandboxchange={handleSandboxChange}>
+                            </c-dx-sandbox-dropdown>
+                        <!-- </div> -->
+                    </template>
+                </template>
+                <template if:false={isSalesforceUser}>
+                    <!-- Non-Salesforce User Dropdown -->
+                    <template if:true={selectSandbox}>
+                        <div class="filter-section me-2">
+                            <lightning-combobox name="sandboxSelectBox" style="width: 150px; margin-top: -24px;" label=""
+                                value={selectedSandbox} placeholder="Select Sandbox" options={selectOption}
+                                onchange={getSandboxName}></lightning-combobox>
+                        </div>
+                    </template>
+                </template>
+
+                <template if:true={combobox360View}>
+                    <lightning-combobox name="bombobox360View" style="width: 150px; margin-top: -24px;" label=""
+                        value={selectedSandbox} placeholder="Select Sandbox" options={view360Options}
+                        onchange={getSandboxName}></lightning-combobox>
+                </template>
+                <template if:true={comboboxEnvGatesView}>
+                    <lightning-combobox name="comboboxEnvGatesView" style="width: 150px; margin-top: -24px;" label=""
+                        value={selectedSandbox} placeholder="Select Sandbox" options={viewEnvGatesOptions}
+                        onchange={getSandboxName}></lightning-combobox>
+                </template>
+            </div>
+        </div>
+    </template>
+    <!-- Header Section -->
+</template>

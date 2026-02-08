@@ -1,0 +1,11 @@
+<template>
+    <div role="button" class="slds-grid slds-grid_align-spread dx-sort-header" data-name={name} onclick={sortIconClick}>
+        <div class="label">{name}</div>
+       <template lwc:if={dataIcon}>
+        <lightning-icon class="sort-icon" icon-name={iconName} size='xx-small' variant='warning' title="Sort"></lightning-icon>
+       </template> 
+       <template lwc:else>
+        <lightning-icon class="sort-icon" icon-name="utility:sort" size='xx-small' title="Sort"></lightning-icon>
+       </template> 
+    </div>
+</template>

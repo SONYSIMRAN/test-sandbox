@@ -1,0 +1,29 @@
+<template>
+    <div class={view360CardClass}>
+        <div class="header-360 slds-p-horizontal_x-small">
+            <div class="slds-grid slds-grid_align-spread">
+                <div>
+                    <div class="slds-text-heading_medium">{item.packageName}</div>
+                    <div class="slds-text-title slds-text-color_weak slds-p-top_xx-small">
+                        <ul class="slds-list_horizontal slds-p-left_none slds-m-bottom_none">
+                            <li class="slds-item">{item.Version}</li>
+                            <li class="slds-item">{item.sandbox}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <c-dx-vis360-card-header-values package-name={item.packageName} sandbox-name={item.sandbox}
+                            risk-score={item.riskScore} sort-score={item.sortScore}>
+                        </c-dx-vis360-card-header-values>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <c-dx-vis-view360-card-body onactivetooltip={setActiveTooltip} select-tooltip={clickedPackageTooltip} release-branch={item.Branch} card-header-color={item.IsOrgDependent} package-name={item.packageName} risk-score={item.riskScore} status={item.status}
+                code-quality-detail={item.codeQuality.detail} sandbox-name={item.sandbox}>
+            </c-dx-vis-view360-card-body>
+        </div>
+    </div>
+</template>

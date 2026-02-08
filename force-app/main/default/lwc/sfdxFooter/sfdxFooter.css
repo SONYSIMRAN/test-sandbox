@@ -1,0 +1,35 @@
+.sfdx-footer {
+    border: 1px solid #dfdfdf;
+    background: #fff;
+}
+
+.sfdx-footer-copiright {
+    color: #303030;
+    font-size: 11px;
+    background: #F1F1F1;
+    border-top: 1px solid #cecece;
+    text-align: center;
+}
+.sfdx-footer-card {
+    height: 250px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.org-dep-box {
+    width: 50px;
+    height: 30px;
+}
+.dx-text-center {
+    text-align: center;
+}
+.dx-font-bold {
+    font-weight: 600;
+}
+.org-dep-color {
+    background: #f1736b;
+}
+.org-indep-color {
+    background: #65bf78;
+}
+.org-na-color {
+    background: #6c757d;
+}

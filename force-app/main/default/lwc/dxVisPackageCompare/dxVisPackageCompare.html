@@ -1,0 +1,114 @@
+<template>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <template if:true={accordionPackageALoader}>
+                    <div class="col-md-12">
+                        <div class="card p-2 mb-2">
+                        <c-dx-vis-loader></c-dx-vis-loader>
+                        </div>
+                    </div>
+                </template>
+                <template lwc:if={accordionPackageAData}>
+                <div class="col-md-12">
+                    <div class="card p-2 mb-2">
+                        <h3>{accordionPackageAName}</h3>
+                        <label for="formFile" class="form-label">Version: <span class="text-secondary fw-bold small">
+                                {accordionPackageAVerion}</span></label>
+                        <label for="formFile" class="form-label">Sandbox: <span
+                                class="text-secondary fw-bold small ms-2">{accordionPackageASandbox}</span></label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card">
+                        <!-- <package A accordion -->
+                        <lightning-accordion class="accordion-package-a" onsectiontoggle={handleToggleSection}
+                            active-section-name={section}>
+                            <template for:each={accordionPackageAData} for:item="item" for:index="index">
+                                <lightning-accordion-section name={index} key={item.name} label={item.name}>
+                                    <ul class="list-inline">
+                                        <template for:each={item.members} for:item="member">
+                                            <li class="list-inline-item" key={member.id}>
+                                                <span class="badge bg-secondary rounded-pill"
+                                                    name={member.id}>{member.name}</span>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </lightning-accordion-section>
+                            </template>
+                        </lightning-accordion>
+                        <!-- <package A accordion -->
+                    </div>
+                </div>
+            </template>
+            <template lwc:if={accordionPackageANoData}>
+                <c-dx-vis-no-data></c-dx-vis-no-data>
+            </template>
+            </div>
+            <div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card p-2 mb-2">
+                        <select style="max-width: 200px;" class="form-select" aria-label="Default select example"
+                            onchange={handlePackageBSelect}>
+                            <template for:each={packageCompareList} for:item="item">
+                                <option key={item.id} value={item.id}>{item.name}</option>
+                            </template>
+                        </select>
+                        <!-- Label section -->
+                        <template lwc:if={accordionPackageBVerion}>
+                            <label for="formFile" class="form-label">Version: <span
+                                    class="text-secondary fw-bold small">{accordionPackageBVerion}</span></label>
+                        </template>
+                        <template lwc:if={accordionPackageBSandbox}>
+                            <label for="formFile" class="form-label">Sandbox: <span
+                                    class="text-secondary fw-bold small ms-2">{accordionPackageBSandbox}</span></label>
+                        </template>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <template if:true={accordionPackageBDataLoader}>
+                        <c-dx-vis-loader></c-dx-vis-loader>
+                    </template>
+                    <div class="card">
+                        <!-- pakage B accordion -->
+                        <template lwc:if={accordionPackageBData}>
+                            <lightning-accordion class="accordion-package-a" onsectiontoggle={handleToggleSectionB}
+                                active-section-name={sectionB}>
+                                <template for:each={accordionPackageBData} for:item="item" for:index="index">
+                                    <lightning-accordion-section name={index} key={item.name} label={item.name}>
+                                        <ul class="list-inline">
+                                            <template for:each={item.members} for:item="member">
+                                                <li class="list-inline-item" key={member.id}>
+                                                    <template lwc:if={member.inPackage}>
+                                                        <span class="badge bg-success rounded-pill"
+                                                            name={member.id}>{member.name}</span>
+                                                    </template>
+                                                    <template lwc:if={member.git}>
+                                                        <span class="badge bg-warning text-dark rounded-pill"
+                                                            name={member.id}>{member.name}</span>
+                                                    </template>
+                                                    <template lwc:else>
+                                                        <span class="badge bg-danger text-dark rounded-pill"
+                                                            name={member.id}>{member.name}</span>
+                                                    </template>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </lightning-accordion-section>
+                                </template>
+                            </lightning-accordion>
+                        </template>
+                        <template lwc:if={packageBNoData}>
+                            <c-dx-vis-no-data message="No Data to Compare"></c-dx-vis-no-data>
+                        </template>
+                        <!-- pakage A accordion -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

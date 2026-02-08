@@ -1,0 +1,208 @@
+<template>
+    <lightning-modal-header label={description}></lightning-modal-header>
+    <lightning-modal-body>
+        <template lwc:if={loader}>
+            <div>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+        </template>
+        <template lwc:else>
+            <template lwc:if={installedPackage}>
+                <lightning-tile label={installedPackage.SubscriberPackage.Name} type="media">
+                    <lightning-icon slot="media" icon-name='utility:package'
+                        alternative-text={installedPackage.SubscriberPackage.Name} size='medium'
+                        title={installedPackage.SubscriberPackage.Name}></lightning-icon>
+                    <p class="slds-truncate" title={installedPackage.SubscriberPackageVersion.Description}>
+                        {installedPackage.SubscriberPackageVersion.Description}</p>
+                </lightning-tile>
+                <div class="slds-box slds-m-top_x-small">
+                    <ul class="slds-list_horizontal">
+                        <li class="slds-p-around_small">
+                            <div class="slds-text-title slds-p-bottom_xx-small">Package Container Options</div>
+                            <div class="fontBold">{installedPackage.SubscriberPackageVersion.Package2ContainerOptions}
+                            </div>
+                        </li>
+                        <li class="slds-border_left slds-p-around_small">
+                            <div class="slds-text-title slds-p-bottom_xx-small">Deployed</div>
+                            <div class="fontBold">{installedPackage.SubscriberPackageVersion.Name}</div>
+                        </li>
+                        <li class="slds-border_left slds-p-around_small">
+                            <div class="slds-text-title slds-p-bottom_xx-small">Version</div>
+                            <div class="fontBold">
+                                {installedPackage.SubscriberPackageVersion.MajorVersion}.{installedPackage.SubscriberPackageVersion.MinorVersion}.{installedPackage.SubscriberPackageVersion.PatchVersion}.{installedPackage.SubscriberPackageVersion.BuildNumber}
+                            </div>
+                        </li>
+                        <li class="slds-p-around_small slds-border_left">
+                            <div class="slds-text-title slds-p-bottom_xx-small">Install Validation Status</div>
+                            <div class="fontBold">{installedPackage.SubscriberPackageVersion.InstallValidationStatus}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="slds-p-vertical_medium">
+                    <ul class="slds-list_horizontal">
+                        <li class="slds-p-around_small">
+                            <div class="slds-text-title slds-p-bottom_xx-small">Beta</div>
+                            <div class="fontBold slds-m-top_xx-small">
+                                <template lwc:if={installedPackage.SubscriberPackageVersion.isBeta}>
+                                    <span
+                                        class="slds-badge_inverse slds-border_top slds-border_right slds-border_bottom slds-border_left slds-p-around_xx-small slds-m-top_xx-small customBoleanBottom">true</span>
+                                </template>
+                                <template lwc:else><span
+                                        class="slds-badge_inverse slds-border_top slds-border_right slds-border_bottom slds-border_left slds-p-around_xx-small slds-m-top_xx-small customBoleanBottom">false</span></template>
+                            </div>
+                        </li>
+                        <li class="slds-p-around_small">
+                            <div class="slds-text-title slds-p-bottom_xx-small">Deprecated</div>
+                            <div class="fontBold slds-m-top_xx-small">
+                                <template lwc:if={installedPackage.SubscriberPackageVersion.IsDeprecated}>
+                                    <span
+                                        class="slds-badge_inverse slds-border_top slds-border_right slds-border_bottom slds-border_left slds-p-around_xx-small slds-m-top_xx-small customBoleanBottom">true</span>
+                                </template>
+                                <template lwc:else><span
+                                        class="slds-badge_inverse slds-border_top slds-border_right slds-border_bottom slds-border_left slds-p-around_xx-small slds-m-top_xx-small customBoleanBottom">false</span></template>
+                            </div>
+                        </li>
+                        <li class="slds-p-around_small">
+                            <div class="slds-text-title slds-p-bottom_xx-small">Org Dependent</div>
+                            <div class="fontBold slds-m-top_xx-small">
+                                <template lwc:if={installedPackage.SubscriberPackageVersion.IsOrgDependent}>
+                                    <span
+                                        class="slds-badge_inverse slds-border_top slds-border_right slds-border_bottom slds-border_left slds-p-around_xx-small slds-m-top_xx-small customBoleanBottom">true</span>
+                                </template>
+                                <template lwc:else><span
+                                        class="slds-badge_inverse slds-border_top slds-border_right slds-border_bottom slds-border_left slds-p-around_xx-small slds-m-top_xx-small customBoleanBottom">false</span></template>
+                            </div>
+                        </li>
+                        <li class="slds-p-around_small">
+                            <div class="slds-text-title slds-p-bottom_xx-small">Managed</div>
+                            <div class="fontBold slds-m-top_xx-small">
+                                <template lwc:if={installedPackage.SubscriberPackageVersion.IsManaged}>
+                                    <span
+                                        class="slds-badge_inverse slds-border_top slds-border_right slds-border_bottom slds-border_left slds-p-around_xx-small slds-m-top_xx-small customBoleanBottom">true</span>
+                                </template>
+                                <template lwc:else><span
+                                        class="slds-badge_inverse slds-border_top slds-border_right slds-border_bottom slds-border_left slds-p-around_xx-small slds-m-top_xx-small customBoleanBottom">false</span></template>
+                            </div>
+                        </li>
+                        <li class="slds-p-around_small">
+                            <div class="slds-text-title slds-p-bottom_xx-small">Password Protected</div>
+                            <div class="fontBold slds-m-top_xx-small">
+                                <template lwc:if={installedPackage.SubscriberPackageVersion.IsPasswordProtected}>
+                                    <span
+                                        class="slds-badge_inverse slds-border_top slds-border_right slds-border_bottom slds-border_left slds-p-around_xx-small slds-m-top_xx-small customBoleanBottom">true</span>
+                                </template>
+                                <template lwc:else><span
+                                        class="slds-badge_inverse slds-border_top slds-border_right slds-border_bottom slds-border_left slds-p-around_xx-small slds-m-top_xx-small customBoleanBottom">false</span></template>
+                            </div>
+                        </li>
+                        <li class="slds-p-around_small">
+                            <div class="slds-text-title slds-p-bottom_xx-small">Security Reviewed</div>
+                            <div class="fontBold slds-m-top_xx-small">
+                                <template lwc:if={installedPackage.SubscriberPackageVersion.IsSecurityReviewed}>
+                                    <span
+                                        class="slds-badge_inverse slds-border_top slds-border_right slds-border_bottom slds-border_left slds-p-around_xx-small slds-m-top_xx-small customBoleanBottom">true</span>
+                                </template>
+                                <template lwc:else><span
+                                        class="slds-badge_inverse slds-border_top slds-border_right slds-border_bottom slds-border_left slds-p-around_xx-small slds-m-top_xx-small customBoleanBottom">false</span></template>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_1-of-2">
+                        <div class="slds-text-title slds-p-bottom_x-small">Destination Profiles</div>
+                        <table
+                            class="dx-vis-table-sticky slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered"
+                            aria-label="Example table of Opportunities with no row hovers">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Opportunity Name">Name</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Account Name">Type</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Close Date">No Access</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Stage">Display Name</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Confidence">Description</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template
+                                    for:each={installedPackage.SubscriberPackageVersion.Profiles.destinationProfiles}
+                                    for:item="profile">
+                                    <tr class="slds-hint-parent" key={profile.profileId}>
+                                        <td data-label={profile.name}>
+                                            <div class="slds-truncate" title={profile.name}>
+                                                {profile.name}
+                                            </div>
+                                        </td>
+                                        <td data-label={profile.type}>
+                                            <div class="slds-truncate" title={profile.type}>{profile.type}</div>
+                                        </td>
+                                        <td data-label={profile.noAccess}>
+                                            <div class="slds-truncate" title={profile.noAccess}>{profile.noAccess}</div>
+                                        </td>
+                                        <td data-label={profile.isplayName}>
+                                            <div class="slds-truncate" title={profile.isplayName}>{profile.isplayName}
+                                            </div>
+                                        </td>
+                                        <td data-label=}profile.description}>
+                                            <div class="slds-truncate" title={profile.description}>{profile.description}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <div class="slds-text-title slds-p-bottom_x-small">Source Profiles</div>
+                        <table
+                            class="dx-vis-table-sticky slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered"
+                            aria-label="Example table of Opportunities with no row hovers">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Opportunity Name">label</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Account Name">Value</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={installedPackage.SubscriberPackageVersion.Profiles.sourceProfiles}
+                                    for:item="profile">
+                                    <tr class="slds-hint-parent" key={profile.value}>
+                                        <td data-label={profile.label}>
+                                            <div class="slds-truncate" title={profile.label}>
+                                                {profile.label}
+                                            </div>
+                                        </td>
+                                        <td data-label={profile.value}>
+                                            <div class="slds-truncate" title={profile.value}>{profile.value}</div>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </template>
+        </template>
+
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button label="Close" onclick={handleOkay}></lightning-button>
+    </lightning-modal-footer>
+</template>

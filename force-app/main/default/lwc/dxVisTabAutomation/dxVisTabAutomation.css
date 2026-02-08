@@ -1,0 +1,69 @@
+.info-text {
+    text-transform: capitalize !important;
+    font-size: 10px;
+}
+.bg-purple {
+    background: #c5b3e6 !important;
+}
+.custom-popover {
+    min-width: 400px;
+}
+.bg-custom-red {
+    background: #e35d6a;
+}
+.popover-header {
+    background: #dc3545 !important;
+}
+
+.table-container {
+    max-height: 80vh;
+}
+.custom-scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #595959;
+}
+.custom-scroll::-webkit-scrollbar {
+    width: 6px;
+    background-color: #595959;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+    background-color: #b3b3b3;
+}
+.result-pill {
+    width: 100px;
+}
+.filter-text {
+    font-size: 12px;
+    padding: 5px 0px;
+}
+.filter-select {
+    font-size: 0.8rem !important;
+    padding: 0.2rem 1.5rem 0.2rem 1rem !important;
+    background-position: right 0.2rem center !important;
+    cursor: pointer;
+    max-width: 80px;
+}
+.asert-green {
+    background-color: #f3fdf6 !important;
+}
+.asert-green td:first-child {
+    background: linear-gradient(to right, #17a251 8%, white 8%) !important;
+}
+.asert-red {
+    background-color: #fff0f0 !important;
+}
+.asert-red td:first-child {
+    background: linear-gradient(to right, #d94444 8%, #fff 0 8%) !important;
+}
+.asert-green-number {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background-color: #17a251 !important;
+}
+.asert-red-number {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background-color: #b84848 !important;
+}

@@ -1,0 +1,28 @@
+.btn-landing-action {
+    width: 35px;
+    height: 35px;
+    padding: 0.2rem !important;
+    border: 1px solid #bbb !important;
+    line-height: 14px !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12);
+}
+.btn-landing-action button {
+    background: #fff !important;
+}
+.dropdown-sort-packages {
+    padding: 0px !important;
+    margin-left: -1px;
+}
+.dropdown-sort-packages button {
+    padding: 0px 2px;
+}
+.dropdown-sort-packages button::after {
+    vertical-align: 0em;
+    margin-left: 1px;
+}
+
+.filter-section select {
+    line-height: 1.3;
+    border: 1px solid #bbb!important;
+    box-shadow: 0 1px 1px rgba(0,0,0,.12), 0 2px 2px rgba(0,0,0,.12);
+}

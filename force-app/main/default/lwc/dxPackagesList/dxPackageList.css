@@ -1,0 +1,33 @@
+/* dxPackagesList.css */
+
+/* 
+.page-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1.5rem;
+    padding: 0;
+  } */
+
+  /* Custom CSS for Grid Layout */
+
+/* Styles for the row container */
+.row {
+    display: flex; /* Use flexbox for the row layout */
+    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+    margin-right: -15px; /* Compensate for negative margin in Bootstrap */
+    margin-left: -15px; /* Compensate for negative margin in Bootstrap */
+  }
+  
+  /* Styles for the grid container */
+  .grid {
+    width: 50%; /* Ensure the grid takes up the full width of its parent */
+    margin-bottom: 30px; /* Optional: Add bottom margin for spacing */
+  }
+  
+  /* Styles for the page container (holds package cards) */
+  .page-container {
+    display: grid; /* Use CSS Grid for layout */
+    grid-template-columns: repeat(4, 1fr); /* Create 4 columns per row */
+    grid-gap: 15px; /* Add gap between grid items */
+    padding: 15px; /* Add padding inside the grid container */
+  }

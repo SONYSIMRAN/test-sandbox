@@ -1,0 +1,12 @@
+<template>
+    <template lwc:if={resultPass}>
+        <span class="badge result-pill rounded-pill px-2 bg-success">Pass</span>
+    </template>
+    <template lwc:elseif={resultFail}>
+        <span class="badge result-pill rounded-pill px-2 bg-danger">Fail</span>
+    </template>
+    <template lwc:else>
+        <span
+            class="badge result-pill rounded-pill px-2 bg-warning text-dark">Unknown</span>
+    </template>
+</template>

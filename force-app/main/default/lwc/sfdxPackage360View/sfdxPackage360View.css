@@ -1,0 +1,147 @@
+.package-card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.package-card {
+    background-color: #ffffff;
+    /* border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); */
+    /* padding: 20px; */
+}
+
+.org-dependent-false .view-360-header {
+    border-bottom: 1px solid #B80A00;
+    background: #F5E8E8;
+}
+.org-dependent-true::after {
+    content: '';
+    background-image: url('/resource/visualizer_images/risk-green.svg');    
+    position: absolute;
+    right: -6px;
+    bottom: -6px;
+    width: 30px;
+    height: 30px;
+}
+.org-dependent-false::after {
+    content: '';
+    background-image: url('/resource/visualizer_images/risk-red.svg');
+    position: absolute;
+    right: -6px;
+    bottom: -6px;
+    width: 30px;
+    height: 30px;
+}
+.org-dependent-true .view-360-header {
+    border-bottom: 1px solid #a5c8ad;
+    background: #B6DEBF;
+}
+ 
+.slds-border_custom {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.package-card.org-dependent-true {
+    border: 1px solid #4b830f;
+}
+
+.package-card.org-dependent-false {
+    border: 1px solid #B80A00;
+}
+
+
+.package-title {
+    font-weight: 500;
+    padding: 10px;
+}
+
+.metric {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #dcdcdc;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+.view-360-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1.5rem;
+}
+.slds-box .view-360-box:first-child .view-360-header:first-child {
+    /* margin-top: -1px; */
+    border-radius: 3px 3px 0 0;
+}
+
+.header-360-right-icons .img-box {
+    background: #CBB649;
+    border: 1px solid #A79742;
+    margin-left: 5px;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+}
+.header-360-right-icons .img-box img {
+    width: 20px;
+    height: 20px;
+}
+
+.vew-360-labels {
+    color: #5A5A5A;
+    font-size: 12px;
+}
+.vew-360-label-values {
+    color: #212121;
+    font-size: 13px;
+    font-weight: 500;
+    max-width: 130px;
+}
+
+.slds-list_horizontal {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.view-360-card-footer-list {
+    margin-top: 10px;
+}
+.button-fake-link {
+    font-size: 12px;
+    border: 0;
+    padding: 0;
+    color: #2387c2;
+    text-decoration: underline;
+}
+.button-fake-link:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+.view-360-card-footer-list li button {
+    font-size: 12px;
+    padding: 0px 5px;
+    border: 0;
+    border-right: 1px solid #c7c7c7;
+    color: #2387c2;
+    text-decoration: underline;
+    background: none;
+}
+.view-360-card-footer-list li {
+    padding: 0px;
+}
+.view-360-card-footer-list li button:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+.view-360-card-footer-list li:last-child button {
+    border-right: 0px;
+    padding-right: 0px;
+}
+.view-360-card-footer-list li:first-child button {
+    padding-left: 0px;
+}
+.slds-card+.slds-card {
+    margin-top: 0;
+}

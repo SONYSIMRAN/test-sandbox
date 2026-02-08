@@ -1,0 +1,27 @@
+<template>
+    <template if:false={cqdNoData}>
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-end">
+                <lightning-combobox name="progress" label="Status" value={defaultSelectedIndex}
+                    placeholder="Select Progress" options={filterOptions} onchange={handleCqdChange}></lightning-combobox>
+            </div>
+        </div>
+    </template>
+    <template if:true={histogramGraphLoader}>
+        <c-dx-vis-loader></c-dx-vis-loader>
+    </template>
+    <template if:false={graphNoData}>
+            <div class="row">
+                <div class="col-md-12 overflow-auto">
+                    <div>{labelName}</div>
+                    <div class="grapContainer">
+                        <canvas class="HistogramGraph" style="width: 300vw; height:500px" lwc:dom="manual"></canvas>
+                    </div>
+                </div>
+            </div>
+    </template>
+    <template if:true={graphNoData}>
+        <c-dx-vis-no-data message="No Data to Available"></c-dx-vis-no-data>
+    </template>
+
+</template>

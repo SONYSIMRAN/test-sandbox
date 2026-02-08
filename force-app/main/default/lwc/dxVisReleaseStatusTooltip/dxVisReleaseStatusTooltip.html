@@ -1,0 +1,16 @@
+<template>
+    <!-- SLDS Popover with Close Button -->
+    <section class="slds-popover dx-release-info-popover slds-nubbin_top slds-popover_alert tooltip-container" role="dialog" >
+        <button class="slds-button slds-button_icon slds-popover__close slds-float_right" 
+        title="Close dialog" 
+        onclick={handleClose}>
+        <lightning-icon icon-name="utility:close" alternative-text="Close dialog" size="small"></lightning-icon>
+        <span class="slds-assistive-text">Close dialog</span>
+        </button>
+
+        <!-- Popover Body -->
+        <div class="slds-popover__body">
+            <p>Overall Status: {overallStatus}</p>
+        </div>
+    </section>
+</template>

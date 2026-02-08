@@ -1,0 +1,96 @@
+<template>
+    <div class="card-container">
+        <template if:true={searchInput}>
+            <div class="row">
+                <div class="col-md-6">
+                    <lightning-input type="text" label="Search ZTT Tests" placeholder="type here..."
+                        onchange={onChangeSearchInput} onblur={onBlurSearchInput}></lightning-input>
+                </div>
+            </div>
+        </template>
+        <div class="row">
+            <div class="col-6">
+                <div class="d-flex mt-4">
+                    <template lwc:if={DetailsResults}>
+                        <c-dx-vis-tab-automation-details-results type="ZTT" status={exeZTTStatus}
+                            details={DetailsResults}></c-dx-vis-tab-automation-details-results>
+                    </template>
+                </div>
+            </div>
+            <div class="col-6">
+                <template lwc:if={ZTTResultData}>
+                    <div class="d-flex justify-content-end">
+                        <lightning-combobox name="filterByTeam" style="width: 118px" class="me-2" value="all"
+                            placeholder="All Teams" options={ZTTFilterOptions}
+                            onchange={filterZTTByTeamName}></lightning-combobox>
+                        <lightning-combobox name="filterByStatus" style="width: 118px" class="me-2" value="all"
+                            placeholder="All Results" options={statusOptions}
+                            onchange={filterZTTByStatus}></lightning-combobox>
+                        <!-- Pills -->
+                        <c-dx-vis-tab-automation-test-counts
+                            result={ZTTResultData}></c-dx-vis-tab-automation-test-counts>
+                        <!-- Pills -->
+                    </div>
+                </template>
+            </div>
+        </div>
+        <div class="table-container custom-scroll overflow-auto slds-border_top slds-border_left slds-border_bottom slds-m-top_xx-small">
+            <template if:true={ZTTLoader}>
+                <c-dx-vis-loader></c-dx-vis-loader>
+            </template>
+            <template lwc:if={ZTTResultData}>
+                <template for:each={ZTTResultData} for:item="item">
+                    <c-dx-vis-tab-automation-child-row key={item.UID} row={item}
+                        deploy-time={packageDeployTime}></c-dx-vis-tab-automation-child-row>
+                </template>
+            </template>
+            <template if:true={ZTTNoData}>
+                <c-dx-vis-no-data message="No ZTT Tests Available"></c-dx-vis-no-data>
+            </template>
+        </div>
+        <hr class="border-top">
+        <div class="row">
+            <div class="col-6">
+                <div class="d-flex mt-4">
+                    <template lwc:if={DetailsResults}>
+                        <c-dx-vis-tab-automation-details-results type="PDT" status={exePDTStatus}
+                            details={DetailsResults}></c-dx-vis-tab-automation-details-results>
+                    </template>
+                </div>
+            </div>
+            <div class="col-6">
+                <template lwc:if={PDTResultData}>
+                    <div class="d-flex justify-content-end">
+                        <lightning-combobox name="filterByTeam" style="width: 118px" class="me-2" value="all"
+                            placeholder="All Teams" options={PDTFilterOptions}
+                            onchange={filterPDTByTeamName}></lightning-combobox>
+                        <lightning-combobox name="filterByStatus" style="width: 118px" class="me-2" value="all"
+                            placeholder="All Results" options={statusOptions}
+                            onchange={filterPDTByStatus}></lightning-combobox>
+                        <!-- Pills -->
+
+                        <c-dx-vis-tab-automation-test-counts
+                            result={PDTResultData}></c-dx-vis-tab-automation-test-counts>
+
+                        <!-- Pills -->
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <div class="table-container custom-scroll overflow-auto slds-border_top slds-border_left slds-border_bottom slds-m-top_xx-small">
+            <template if:true={PDTLoader}>
+                <c-dx-vis-loader></c-dx-vis-loader>
+            </template>
+            <template lwc:if={PDTResultData}>
+                <template for:each={PDTResultData} for:item="item">
+                    <c-dx-vis-tab-automation-child-row key={item.UID} row={item}
+                        deploy-time={packageDeployTime}></c-dx-vis-tab-automation-child-row>
+                </template>
+            </template>
+            <template if:true={PDTNoData}>
+                <c-dx-vis-no-data message="No PDT Tests Available"></c-dx-vis-no-data>
+            </template>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,23 @@
+<template>
+        <div class={packageCardClass}>
+            <div class="slds-text-heading_medium">{item.packageName}</div>
+            <ul class="slds-list_horizontal slds-m-top_x-small">
+                <li><div class="slds-text-title slds-text-color_weak">Version: </div></li>
+                <li><div class="slds-text-title fontBold slds-m-left_x-small" style="font-weight: var(--slds-g-font-weight-6);">{item.Version}</div></li>
+            </ul>
+            <div class="slds-grid slds-grid_align-spread">
+                <div class="slds-col">
+                    <ul class="slds-list_horizontal slds-p-top_xx-small">
+                        <li><div class="slds-text-title slds-text-color_weak">Deployed: </div></li>
+                        <li><div class="slds-text-title fontBold slds-m-left_x-small" style="font-weight: var(--slds-g-font-weight-6);">{item.PackageVersionName}</div></li>
+                    </ul>
+                  </div>
+                  <div class="slds-col">
+                    <span class="cursorPointer">
+                        <lightning-icon icon-name='action:more'  onclick={handleInstalledPackageDetails} data-id={item.id} data-package={item.packageName} alternative-text='more' size='xx-small'
+                        title='Package Detail'></lightning-icon>
+                    </span>
+                  </div>
+            </div>
+        </div>
+</template>

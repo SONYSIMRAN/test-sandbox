@@ -1,0 +1,8 @@
+.no-results {
+    padding: 3rem;
+}
+.no-results h2 {
+    line-height: 1;
+    font-size: 5rem;
+    font-weight: 100;
+}

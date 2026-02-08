@@ -1,0 +1,46 @@
+/*Risk tooltip*/
+.card-risk-tootip {
+    position: absolute;
+    border: 1px solid #3366a5;
+    border-top-width: 3px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: 0px 0px 0px 8px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.risk-tooltip-arrow {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #535353;
+    position: absolute;
+    left: -10px;
+}
+.card-risk-tootip ul.tooltip-overflow-auto {
+    overflow: auto;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+.risk-bg-high {
+    background: #fbedec;
+    border-color: #d9554b;
+}
+.risk-bg-medium {
+    background: #fffdf1;
+    border-color: #cfbe54;
+}
+.risk-bg-low {
+    background: #ecfff1;
+    border-color: #4fc56e;
+}
+.card-risk-tootip ul {
+    padding: 0;
+}

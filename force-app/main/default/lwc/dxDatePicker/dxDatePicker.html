@@ -1,0 +1,26 @@
+<template>
+    <!-- <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </template> -->
+    <div class="date-range-picker">
+        <lightning-input
+            type="date"
+            label="Start Release Date"
+            value={startDate}
+            onchange={handleStartDateChange}>
+        </lightning-input>
+        
+        <lightning-input
+            type="date"
+            label="End Release Date"
+            value={endDate}
+            onchange={handleEndDateChange}>
+        </lightning-input>
+        
+        <lightning-button
+            class="apply-button"
+            label="Apply"
+            onclick={handleApplyClick}>
+        </lightning-button>
+    </div>
+</template>

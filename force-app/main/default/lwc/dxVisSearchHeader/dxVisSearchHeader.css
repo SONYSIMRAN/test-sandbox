@@ -1,0 +1,12 @@
+.header-top-buttons {
+    width: 34px;
+    height: 34px;
+    padding: 3px 6px;
+}
+.header-top-buttons:hover {
+    background-color: #585858 !important;
+}
+.header-top-buttons svg {
+    width: 20px;
+    height: 20px;
+}

@@ -1,0 +1,54 @@
+.radial-pbsr-bg-red {
+    background: conic-gradient(#dc3545 var(--progress),#ced4da 0deg);
+  }
+  .radial-pbsr-bg-orange {
+    background: conic-gradient(#fd7e14 var(--progress),#ced4da 0deg);
+  }
+  .radial-pbsr-bg-yellow {
+    background: conic-gradient(#ffc107 var(--progress),#ced4da 0deg);
+  }
+  .radial-pbsr-bg-green {
+    background: conic-gradient(#198754 var(--progress),#ced4da 0deg);
+  }
+  .radial-progress {
+    display: flex;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    font-size: 0;
+  }
+  .radial-progress:after {
+    content: attr(data-progress);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 6px;
+    border-radius: 50%;
+    background: #052c65;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    font-weight: 700;
+  }
+  .radial-progress-small {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    font-size: 0;
+  }
+  .radial-progress-small:after {
+    content: attr(data-progress);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 4.5px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #272727;
+    font-size: 10px;
+    text-align: center;
+    font-weight: 700;
+}

@@ -1,0 +1,31 @@
+<template>
+    <template lwc:if={textPass}>
+        <span class="view360-text-success">PASS</span>
+    </template>
+    <template lwc:if={textFail}>
+        <span class="view360-text-warning">FAIL</span>
+    </template>
+    <template if:false={falseGreen}>
+        <template lwc:if={textTrue}>
+            <span class="view360-text-success">TRUE</span>
+        </template>
+        <template lwc:if={textFalse}>
+            <span class="view360-text-warning">FALSE</span>
+        </template>
+    </template>
+    <!--False green-->
+    <template if:true={falseGreen}>
+        <template lwc:if={textTrue}>
+            <span class="view360-text-warning">TRUE</span>
+        </template>
+        <template lwc:if={textFalse}>
+            <span class="view360-text-success">FALSE</span>
+        </template>
+
+    </template>
+    <!--False green-->
+    <template if:false={isTextTypeProvided}>
+        <span class="view360-text-na">N/A</span>
+    </template>
+
+</template>

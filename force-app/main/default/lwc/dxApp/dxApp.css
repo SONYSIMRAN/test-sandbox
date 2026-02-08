@@ -1,0 +1,7 @@
+:host {
+    --sds-c-card-color-background: #191b1c;
+  }
+  
+  header .slds-global-header_container.branding-header.slds-no-print.oneHeader { 
+    display: none !important;
+  }

@@ -1,0 +1,14 @@
+<template>
+  <!--Package Card-->
+  <div class="row">
+      <div class="position-relative col-md-12">
+          <div class="grid" id="Grid">
+              <div class="page-container">
+                  <template for:each={installedPackages} for:item="item">
+                      <c-dx-package-card key={item.Id} item={item}></c-dx-package-card>
+                  </template>
+              </div>
+          </div>
+      </div>
+  </div>
+</template>

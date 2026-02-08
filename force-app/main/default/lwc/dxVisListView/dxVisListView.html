@@ -1,0 +1,58 @@
+<template>
+    <div class="bg-light dxAppPage">
+        <lightning-spinner if:true={isLoading}></lightning-spinner>
+        <template if:true={headerConfig}>
+            <c-dx-header card-view={cardView} kanban-view={kanbanView} list-view={listView}
+                button-package-dep={buttonPackageDep} button-sandbox-code-size={buttonSandboxCodeSize}
+                button-package-sorting={buttonPackageSorting} select-sandbox={selectSandbox} sandbox-list={sandboxList}
+                onchildmethod={getSandbox} onpackagesorting={packageSorting}></c-dx-header>
+        </template>
+        <!-- Body section -->
+        <div class="container my-3">
+            <template if:true={result}>
+                <div class="d-flex justify-content-end">
+                    <div class="small border border-secondary rounded p-1 px-2 position-relative me-4">Total Packages<span
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
+                            {totalPackaegCount}
+                            <span class="visually-hidden">Total Packages</span>
+                        </span>
+                    </div>
+                    <div class="small border border-secondary rounded p-1 px-2 position-relative me-4">Total Org
+                        Dependent<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill "
+                            style="
+                        background-color: #f1736b;">
+                            {orgDependentCount}
+                            <span class="visually-hidden">Total Org Dependent</span>
+                        </span>
+                    </div>
+                    <div class="small border border-secondary rounded p-1 px-2 position-relative me-4">Total Non-Org
+                        Dependent<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                            style="
+                        background-color: #65bf78;">
+                            {noOrgDependent}
+                            <span class="visually-hidden">Total Non-Org Dependent</span>
+                        </span>
+                    </div>
+                    <div class="small border border-secondary rounded p-1 px-2 position-relative">Unpackaged
+                        Metadata<span
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary" title="Metadata Count">
+                            {unpackagedMetadata}
+                            <span class="visually-hidden">Unpackaged Metadata</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="list-card-grid">
+                    <template for:each={result} for:item="item">
+                        <div class="card list-card d-flex rounded-0" key={item.name}>
+                            <c-dx-vis-list-content item={item}></c-dx-vis-list-content>
+                        </div>
+                    </template>
+
+                </div>
+            </template>
+        </div>
+        <!-- Body Section -->
+        <!-- Footer Section -->
+        <c-dx-footer></c-dx-footer>
+    </div>
+</template>

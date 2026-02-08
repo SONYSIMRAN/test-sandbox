@@ -1,0 +1,290 @@
+@keyframes slide-top {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+   }
+    100% {
+        -webkit-transform: translateY(-100px);
+        transform: translateY(-100px);
+   }
+}
+
+.page-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1.5rem;
+    padding: 0;
+  }
+
+.section {
+    margin: 0;
+}
+.section-header {
+    border-bottom: 1px solid #bdbdbd;
+    margin-bottom: 0.25rem;
+}
+.section-header button {
+    color: #51575d;
+}
+.page-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1.5rem;
+    padding: 0;
+}
+.svg-inline--fa {
+    display: var(--fa-display, inline-block);
+    height: 1em;
+    overflow: visible;
+    vertical-align: -0.125em;
+}
+.fa-2x {
+    font-size: 2em;
+}
+.Icon_white {
+    color: #fff;
+}
+.filter-select {
+    font-size: 0.8rem !important;
+    padding: 0.2rem 1.5rem 0.2rem 1rem !important;
+    background-position: right 0.2rem center !important;
+    cursor: pointer;
+}
+
+
+.slide {
+    display: none;
+}
+.card {
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 0 8px #ced4da;
+    max-height: 250px;
+    width: 252px;
+}
+.card:hover {
+    background: #e9ecef;
+    cursor: default;
+}
+
+.delta-arrows {
+    display: block;
+}
+.click-state {
+    z-index: 1;
+    cursor: default;
+    border-radius: 6px;
+    box-shadow: 1px 1px 7px 2px #868e92;
+    transition: 0.6s;
+    transform: translateY(-20%);
+    position: absolute;
+    top: 0;
+    left: 0rem;
+    right: 0rem;
+    background: -webkit-radial-gradient(top left, ellipse, #002c4e 0%, transparent), linear-gradient(to bottom, #0d385c, #2272b1 60%, #002542, #020f18);
+    color: #e9ecef;
+    -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    box-shadow: 0px 2px 3px 1px #b1b1b1;
+    transform: translate(-50%, -50%);
+}
+/* .card .card-box {
+    cursor: pointer;
+} */
+.card .delta-arrows {
+    display: none;
+}
+.card .click-state .delta-arrows {
+    display: block;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.card .click-state .slide {
+    display: block;
+    position: relative;
+}
+.card .click-state .card-footer {
+    border-top: 1px solid #6c6c6c;
+}
+.card .click-state .pointerNone {
+    pointer-events: none;
+}
+.quality-details {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+}
+.card-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #fff;
+    padding: 1rem 0.5rem;
+    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+    gap: 0.25rem;
+}
+.card-header h2 {
+    line-height: 0.8;
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 0;
+    padding-bottom: 0.25rem;
+    max-width: 170px;
+}
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+.card-red {
+    background-color: #f1736b;
+}
+.card-green {
+    background-color: #65bf78;
+}
+.card-grey {
+    background-color: #6c757d;
+}
+.text-truncate-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 0.5rem;
+}
+.text-truncate-container p {
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1;
+}
+.package-details {
+    width: 100%;
+}
+.package-details hr {
+    margin: 0.5rem 0;
+}
+.package-details p {
+    margin-bottom: 0;
+}
+.indicator-container {
+    margin: 0.25rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.start-content {
+    justify-content: start;
+}
+.delta-arrows {
+    display: none;
+}
+/* Delta Arrows */
+.round {
+    position: relative;
+    border: 6px solid #d9d9d9;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin-top: 3px;
+}
+.arrow {
+    position: absolute;
+    bottom: 0;
+    margin-left: -1px;
+    width: 32px;
+    height: 25px;
+    background-size: cover;
+    top: 6px;
+    background-repeat: no-repeat;
+}
+@keyframes bounceAlphaUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+   }
+    25% {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.9);
+   }
+    26% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.9);
+   }
+    55% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+   }
+}
+@keyframes bounceAlphaDown {
+    0% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+   }
+    25% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.9);
+   }
+    26% {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.9);
+   }
+    55% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+   }
+}
+@keyframes bounceAlphaRight {
+    0% {
+        opacity: 1;
+        transform: translateX(0px) scale(1);
+   }
+    25% {
+        opacity: 0;
+        transform: translateX(10px) scale(0.9);
+   }
+    26% {
+        opacity: 0;
+        transform: translateX(-10px) scale(0.9);
+   }
+    55% {
+        opacity: 1;
+        transform: translateX(0px) scale(1);
+   }
+}
+.round .arrow-up {
+    animation-name: bounceAlphaUp;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    background-image: url('/resource/visualizer_images/delta-up.svg');
+    top: 4px;
+}
+.round .arrow-up1 {
+    animation-delay: 0.2s;
+}
+.round .arrow-down {
+    animation-name: bounceAlphaDown;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    background-image: url('/resource/visualizer_images/delta-down.svg');
+}
+.round .arrow-down1 {
+    animation-delay: 0.2s;
+}
+.round .arrow-right {
+    top: 1px;
+    left: 1px;
+    height: 32px;
+    margin-left: 3px;
+    animation-name: bounceAlphaRight;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    background-image: url('/resource/visualizer_images/delta-steady.svg');
+}
+.round .arrow-right1 {
+    animation-delay: 0.2s;
+}

@@ -1,0 +1,52 @@
+/* Tooltip Container */
+/* .slds-popover {
+    max-width: 300px;
+}
+
+/* Positioning */
+/* .tooltip-container {
+    position: absolute;
+    z-index: 10;
+    right: 0;
+    top: 240px;
+    background: white;
+    border: 1px solid #d8dde6;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+} */
+
+/* Close Button */
+/* .slds-popover__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+} */
+
+.dx-release-info-popover {
+    border: 1px solid #dfdfdf;
+    position: absolute;
+    right: 42px;
+    top: 231px;
+    min-width: 300px;
+    background: #fff;
+}
+
+/* .risk-tooltip-arrow {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #535353;
+    position: absolute;
+    left: -10px;
+} */
+
+.risk-tooltip-arrow {
+    width: 0;
+    height: 0;
+    border-bottom: 10px solid #535353;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    left: -10px;
+}

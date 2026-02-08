@@ -1,0 +1,39 @@
+<template>
+   
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-end">
+                <!-- <div class="start-date mx-1">
+                    <lightning-input type="date" name="startDate" label="Enter start date" value={startDate}
+                        max={endDate}></lightning-input>
+                </div>
+                <div class="end-date mx-1">
+                    <lightning-input type="date" name="endDate" label="Enter end date" value={endDate} min={endDate}
+                        max={endDate}></lightning-input>
+                </div> -->
+                
+                <!-- <div class="apply-btn mx-1 mt-4">
+                    <lightning-button onclick={handleOnclickFilter} label="Apply" title="Apply Filter"
+                        icon-name="utility:filter" class="slds-m-left_x-small custom-btn"></lightning-button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- <template if:true={codeSizeGraphLoader}>
+        <c-dx-vis-loader></c-dx-vis-loader>
+    </template> -->
+    <!-- <template if:false={graphNoData}> -->
+        <div class="row">
+            <div class="col-md-12 overflow-auto">
+                <div>{labelName}</div>
+                <div class="grapContainer">
+                    <canvas class="CodeSizeGraph" style="width: 200vw; height:350px" lwc:dom="manual"></canvas>
+                </div>
+            </div>
+        </div>
+    <!-- </template> -->
+    <!-- <template if:true={graphNoData}>
+        <c-dx-vis-no-data message="No Data to Available"></c-dx-vis-no-data>
+    </template> -->
+
+</template>

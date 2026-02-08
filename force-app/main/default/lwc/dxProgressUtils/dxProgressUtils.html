@@ -1,0 +1,54 @@
+<template>
+    <template if:true={customGrade}>
+        <div class="d-flex mt-1">
+            <template if:true={activeGradeA}>
+                <div class="border border-secondary grade grade-active bg-success text-light fw-bold">A</div>
+            </template>
+            <template if:false={activeGradeA}>
+                <div class="border border-secondary grade">A</div>
+            </template>
+            <template if:true={activeGradeB}>
+                <div class="border border-secondary grade grade-active bg-warning fw-bold text-dark">B</div>
+            </template>
+            <template if:false={activeGradeB}>
+                <div class="border border-secondary grade">B</div>
+            </template>
+            <template if:true={activeGradeC}>
+                <div class="border border-secondary grade bg-orange-400 grade-active fw-bold text-dark">C</div>
+            </template>
+            <template if:false={activeGradeC}>
+                <div class="border border-secondary grade">C</div>
+            </template>
+            <template if:true={activeGradeD}>
+                <div class="border border-secondary grade bg-danger grade-active fw-bold text-light">D</div>
+            </template>
+            <template if:false={activeGradeD}>
+                <div class="border border-secondary grade">D</div>
+            </template>
+        </div>
+    </template>
+    <template if:true={customProgress}>
+        <div class="animated-progress my-1 bg-secondary bg-gradient" style={progressWidth}>
+            <span class={progressClass} data-progress={progessPercentage} style={progressStyle}>
+                {progessPercentage}
+            </span>
+        </div>
+    </template>
+    <template if:true={customMeter}>
+        <div class="gauge-wrapper">
+            <div class="gauge four rischio1">
+              <div class="slice-colors">
+                <div class="st slice-item"></div>
+                <div class="st slice-item"></div>
+                <div class="st slice-item"></div>
+              </div>
+              <div class={needleClasses} style={needleStyles}></div>
+              <div class="gauge-center">
+                <div class="label">{meterResult}</div>
+                <div class="number text-uppercase">{meterProfile}</div>
+              </div>
+            </div>
+            <div class="text-center text-uppercase small border border-info">{meterQualityType}</div>
+          </div>
+    </template>
+</template>

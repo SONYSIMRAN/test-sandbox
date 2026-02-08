@@ -1,0 +1,47 @@
+<template>
+    <div class="list-card-content d-flex justify-content-between p-2">
+        <div>
+            <template if:true={orgDep}>
+                <div class="rounded-circle package-icon package-icon-org-dep">
+                    <svg aria-hidden="true" style="width: 21px;" focusable="false" data-prefix="fas" data-icon="cube"
+                        class="svg-inline--fa fa-cube fa-2x Icon_white__qO85S" role="img"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path fill="#fff"
+                            d="M234.5 5.709C248.4 .7377 263.6 .7377 277.5 5.709L469.5 74.28C494.1 83.38 512 107.5 512 134.6V377.4C512 404.5 494.1 428.6 469.5 437.7L277.5 506.3C263.6 511.3 248.4 511.3 234.5 506.3L42.47 437.7C17 428.6 0 404.5 0 377.4V134.6C0 107.5 17 83.38 42.47 74.28L234.5 5.709zM256 65.98L82.34 128L256 190L429.7 128L256 65.98zM288 434.6L448 377.4V189.4L288 246.6V434.6z">
+                        </path>
+                    </svg>
+                </div>
+            </template>
+            <template if:false={orgDep}>
+                <div class="rounded-circle package-icon package-icon-org-non-dep">
+                    <svg aria-hidden="true" style="width: 21px;" focusable="false" data-prefix="fas" data-icon="cube"
+                        class="svg-inline--fa fa-cube fa-2x Icon_white__qO85S" role="img"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path fill="#fff"
+                            d="M234.5 5.709C248.4 .7377 263.6 .7377 277.5 5.709L469.5 74.28C494.1 83.38 512 107.5 512 134.6V377.4C512 404.5 494.1 428.6 469.5 437.7L277.5 506.3C263.6 511.3 248.4 511.3 234.5 506.3L42.47 437.7C17 428.6 0 404.5 0 377.4V134.6C0 107.5 17 83.38 42.47 74.28L234.5 5.709zM256 65.98L82.34 128L256 190L429.7 128L256 65.98zM288 434.6L448 377.4V189.4L288 246.6V434.6z">
+                        </path>
+                    </svg>
+                </div>
+            </template>
+        </div>
+        <div class="w-100">
+            <div class="d-flex justify-content-end">
+                <span class="text-warning fs-6 fw-bold pt-1" title="Metadata Count">
+                    <!-- {item.metadataCount} -->
+                </span>
+                <!-- <div role="button" onclick={navigateToInfo} data-sandbox={getSandbox}
+                data-color={cardColor} data-package={item.name} style="width: 27px;height: 28px;padding: 0px 5px;" class="ms-2 border rounded shadow-sm bg-light list-info-icon bg-gradient">
+                    <svg style="width: 16px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="up-right-from-square" class="svg-inline--fa fa-up-right-from-square fa-sm Icon_white__qO85S" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#66B5C0" d="M384 320c-17.67 0-32 14.33-32 32v96H64V160h96c17.67 0 32-14.32 32-32s-14.33-32-32-32L64 96c-35.35 0-64 28.65-64 64V448c0 35.34 28.65 64 64 64h288c35.35 0 64-28.66 64-64v-96C416 334.3 401.7 320 384 320zM488 0H352c-12.94 0-24.62 7.797-29.56 19.75c-4.969 11.97-2.219 25.72 6.938 34.88L370.8 96L169.4 297.4c-12.5 12.5-12.5 32.75 0 45.25C175.6 348.9 183.8 352 192 352s16.38-3.125 22.62-9.375L416 141.3l41.38 41.38c9.156 9.141 22.88 11.84 34.88 6.938C504.2 184.6 512 172.9 512 160V24C512 10.74 501.3 0 488 0z"></path></svg>
+                </div> -->
+                <!-- <div role="button" onclick={navigateToInfo} style="width: 27px;height: 28px;padding: 0px 5px;" class="ms-2 border rounded shadow-sm bg-light list-info-icon bg-gradient">
+                    <svg style="width: 16px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="up-right-from-square" class="svg-inline--fa fa-up-right-from-square fa-sm Icon_white__qO85S" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#66B5C0" d="M384 320c-17.67 0-32 14.33-32 32v96H64V160h96c17.67 0 32-14.32 32-32s-14.33-32-32-32L64 96c-35.35 0-64 28.65-64 64V448c0 35.34 28.65 64 64 64h288c35.35 0 64-28.66 64-64v-96C416 334.3 401.7 320 384 320zM488 0H352c-12.94 0-24.62 7.797-29.56 19.75c-4.969 11.97-2.219 25.72 6.938 34.88L370.8 96L169.4 297.4c-12.5 12.5-12.5 32.75 0 45.25C175.6 348.9 183.8 352 192 352s16.38-3.125 22.62-9.375L416 141.3l41.38 41.38c9.156 9.141 22.88 11.84 34.88 6.938C504.2 184.6 512 172.9 512 160V24C512 10.74 501.3 0 488 0z"></path></svg>
+                </div> -->
+            </div>
+            <div class="d-flex justify-content-end text-truncate">
+                <span class="text-truncate" style="max-width: 90%;" title={item.PackageName}>
+                    {item.PackageName}
+                </span>
+            </div>
+        </div>
+    </div>
+</template>

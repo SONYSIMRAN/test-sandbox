@@ -1,0 +1,24 @@
+.gate-default {
+    color: rgb(178, 178, 178);
+    border: 1px solid #afafaf;
+    padding: 2px 6px;
+    font-size: 8px;
+    font-weight: 600;
+}
+.gate-enabled {
+    background: rgb(33, 147, 39);
+    color: #fff;
+    border: 1px solid #107310;
+}
+.gate-disabled {
+    background: rgb(210, 41, 41);
+    color: #fff;
+    border: 1px solid #8f1111;
+}
+.gate-status-button-list li:last-child {
+    border-left: 0px;
+}
+ul.gate-status-button-list {
+    margin: 0px;
+    padding: 0px;
+}

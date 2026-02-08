@@ -1,0 +1,11 @@
+<template>
+    <template lwc:if={statusPass}>
+        <span class="text-success">{status}</span>
+    </template>
+    <template lwc:elseif={statusFail}>
+        <span class="text-danger">{status}</span>
+    </template>
+    <template lwc:else>
+        <span class="text-light">{status}</span>
+    </template>
+</template>

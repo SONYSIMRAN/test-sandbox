@@ -1,0 +1,12 @@
+<template>
+    <template if:true={depGraphLoader}>
+        <c-dx-vis-loader></c-dx-vis-loader>
+    </template>
+    <template if:true={graphNoData}>
+        <c-dx-vis-no-data message="No Data to Available"></c-dx-vis-no-data>
+    </template>
+    <div if:false={graphNoData} class="slds-col--padded slds-size--1-of-1">
+        <canvas class="depGraph" style="width:100%; height:500px" height="500" lwc:dom="manual"></canvas>
+    </div>
+   
+</template>

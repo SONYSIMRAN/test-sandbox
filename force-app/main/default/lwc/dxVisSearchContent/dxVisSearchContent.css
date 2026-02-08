@@ -1,0 +1,18 @@
+.package-icon {
+    height: 35px;
+    width: 35px;
+    padding: 4px 7px;
+    margin: 5px 0px;
+}
+.package-icon-org-dep {
+    background-color: #F1736B;
+}
+.package-icon-org-non-dep{
+    background-color: #63CB8D;
+}
+.card-small {
+    font-size: .775em;
+}
+.action-button {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 4px -1px, rgba(0, 0, 0, 0.3) 0px 1px 1px -1px;
+}

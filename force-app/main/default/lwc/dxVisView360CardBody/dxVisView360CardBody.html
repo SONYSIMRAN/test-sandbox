@@ -1,0 +1,217 @@
+<template>
+    <div class="view-360-card">
+        <ul class="slds-list_horizontal">
+            <!-- Left Column -->
+            <li class="slds-size_1-of-2 tooltip-class-position">
+                <template lwc:if={isLoadEnv}>
+                    <div class="slds-border_right slds-border_left slds-border_top">
+                        <!-- Show risk scores for load and test environments -->
+                        <template lwc:if={formattedRiskScores}>
+                            <template for:each={formattedRiskScores} for:item="score">
+                                <div key={score.id} class="risk-score-item slds-border_bottom">
+                                    <div class="slds-grid slds-grid_align-spread slds-p-around_inner-status">
+                                        <div class="slds-truncate vew-360-labels">{score.qualityType}</div>
+                                        <div>
+                                            <c-dx-vis-risk-score-circle  onclick={riskCircleClickhandler} 
+                                            data-quality-type={score.qualityType}
+                                            data-risk-value={score.profile}
+                                            score-value={score.result}
+                                            quality-type={score.qualityType}
+                                            data-risk-package={packageName}
+                                            score-risk={score.profile}></c-dx-vis-risk-score-circle>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                        <template lwc:if={emptyRiskScores}>
+                            <div class="slds-border_bottom lds-p-around_x-small">
+                                <c-dx-vis-no-data-sfdx></c-dx-vis-no-data-sfdx>    
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <template lwc:else>
+                    <!-- Show prod data for production environment -->
+                    <div class="slds-border_around">
+                        <template lwc:if={codeQualityDetail}>
+                            <!-- <template for:each={codeQualityDetail} for:item="prodData"> -->
+                            <div class="status-item">
+                                <div class="slds-p-around_x-small">
+                                    <div class="slds-p-around_x-small">
+                                        <p>Quality</p>
+                                        <c-dx-progress-utils custom-grade={codeQualityDetail.quality}
+                                            grade={codeQualityDetail.quality}></c-dx-progress-utils>
+                                        <!-- Add production data fields -->
+                                        <p>Coverage</p>
+                                        <c-dx-progress-utils custom-progress={codeQualityDetail.coverage}
+                                            percentage={codeQualityDetail.coverage}></c-dx-progress-utils>
+                                        <!-- Display dependency as grade using custom component -->
+                                        <p>Dependency</p>
+                                        <c-dx-progress-utils custom-grade={codeQualityDetail.dependency}
+                                            grade={codeQualityDetail.dependency}></c-dx-progress-utils>
+                                        <p>Automation</p>
+                                        <!-- Display automation as percentage using custom component -->
+                                        <c-dx-progress-utils custom-progress={codeQualityDetail.automation}
+                                            percentage={codeQualityDetail.automation}></c-dx-progress-utils>
+                                        <p>Performance</p>
+                                        <!-- Display performance as percentage using custom component -->
+                                        <c-dx-progress-utils custom-progress={codeQualityDetail.performance}
+                                            percentage={codeQualityDetail.performance}></c-dx-progress-utils>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- </template> -->
+                        </template>
+                        <template lwc:if={emptycodeQualityScores}>
+                            <c-dx-vis-no-data-sfdx></c-dx-vis-no-data-sfdx>
+                        </template>
+                    </div>
+                </template>
+
+            </li>
+            <!-- Right Column -->
+            <li class="slds-size_1-of-2 slds-is-relative">
+                <!--Tooltip details onclick-->
+               <c-dx-vis-view360-card-tooltip 
+               release-branch={releaseBranch}
+               sandbox={sandboxName}
+               package={packageName}
+               risk-profile={riskProfile}
+               risk-value={riskValue}
+               clicked-package={clickedPackageTooltip}
+               active-tooltip={activeTooltip}
+               select-tooltip={selectTooltip}
+               tooltip-top-pos={tooltipTopPosition}></c-dx-vis-view360-card-tooltip>
+                <!--Tooltip details onclick-->
+                <div class="slds-badge custom-badge">ZTT <lightning-icon class="slds-m-left_xxx-small"
+                        icon-name="utility:info" variant="inverse" size="xx-small" alternative-text="ZTT"
+                        title="ZTT"></lightning-icon></div>
+                <div class="slds-box slds-m-left_x-small slds-box-inner-card">
+                    <template if:true={status}>
+                        <!-- <template for:each={status} for:item="status"> -->
+                        <ul class="slds-p-around_none">
+                            <li><span class="vew-360-labels"><button class="button-fake-link" data-color={cardColor}
+                                        data-sandbox={sandboxName} data-tabname="Automation" data-package={packageName}
+                                        onclick={navigateToInfoPage}>Results: </button></span> <span
+                                    class="vew-360-label-values"> {status.ZTTResults}%</span></li>
+                            <li><span class="vew-360-labels">Status: </span> <span
+                                    class="vew-360-label-values"><c-dx-vis-text-info
+                                        text-type={status.ZTTStatus}></c-dx-vis-text-info></span></li>
+                            <li><span class="vew-360-labels">Gate Enabled: </span> <span
+                                    class="vew-360-label-values"><c-dx-vis-text-info
+                                        text-type={zttGateEnabled} make-false-green={greenFalse}></c-dx-vis-text-info></span></li>
+                            <!-- Add more ZTT data here -->
+                        </ul>
+                        <!-- </template> -->
+                    </template>
+                    <template if:false={status}>
+                        <c-dx-vis-no-data-sfdx></c-dx-vis-no-data-sfdx>
+                    </template>
+                </div>
+                <div class="slds-badge custom-badge">PDT <lightning-icon class="slds-m-left_xxx-small"
+                        icon-name="utility:info" variant="inverse" size="xx-small" alternative-text="PDT"
+                        title="PDT"></lightning-icon></div>
+                <div class="slds-box slds-m-left_x-small slds-m-top_x-small slds-box-inner-card">
+                    <template if:true={status}>
+                        <ul class="slds-p-around_none">
+                            <li><span class="vew-360-labels">
+                                    <button class="button-fake-link" data-color={cardColor} data-sandbox={sandboxName}
+                                        data-tabname="Automation" data-package={packageName}
+                                        onclick={navigateToInfoPage}>Results: </button>
+                                </span> <span class="vew-360-label-values"> {status.PDTResults}%</span>
+                            </li>
+                            <li><span class="vew-360-labels">Status: </span> <span
+                                    class="vew-360-label-values"><c-dx-vis-text-info
+                                        text-type={status.PDTStatus}></c-dx-vis-text-info></span></li>
+                            <li><span class="vew-360-labels">Gate Enabled: </span> <span
+                                    class="vew-360-label-values"><c-dx-vis-text-info
+                                        text-type={pdtGateEnabled} make-false-green={greenFalse}></c-dx-vis-text-info></span></li>
+                            <!-- Add more PDT data here -->
+                        </ul>
+                    </template>
+                    <template  if:false={status}>
+                        <c-dx-vis-no-data-sfdx></c-dx-vis-no-data-sfdx>
+                    </template>
+                </div>
+                <div>
+                    <template if:true={status}>
+                        <ul class="slds-p-horizontal_x-small">
+                            <li class="slds-p-top_small">
+                                <ul class="slds-list_horizontal">
+                                    <li>
+                                        <div class="vew-360-labels">Manual QA:</div>
+                                    </li>
+                                    <li>
+                                        <div class="vew-360-label-values slds-truncate slds-p-left_x-small">
+                                            <!-- <template lwc:if={status.ManualQA}>
+                                                {status.ManualQA}
+                                            </template>
+                                            <template lwc:else>
+                                                <span
+                                                    class="slds-text-color_destructive slds-text-title_caps fw-bold">N/A</span>
+                                            </template> -->
+                                            <c-dx-vis-view-360-manual-status manual-qa={status.manualQA}></c-dx-vis-view-360-manual-status>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="vew-360-labels">Package Owner:</div>
+                                <div class="vew-360-label-values slds-truncate"
+                                    title={status.PackageOwner}>
+                                    <template lwc:if={status.PackageOwner}>
+                                        {status.PackageOwner}
+                                    </template>
+                                    <template lwc:else>
+                                        <span
+                                            class="slds-text-color_destructive slds-text-title_caps fw-bold">N/A</span>
+                                    </template>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="vew-360-labels">QA Owner:</div>
+                                <div class="vew-360-label-values slds-truncate" title={status.QAOwner}>
+                                    <template lwc:if={status.QAOwner}>
+                                        {status.QAOwner}
+                                    </template>
+                                    <template lwc:else>
+                                        <span
+                                            class="slds-text-color_destructive slds-text-title_caps fw-bold">N/A</span>
+                                    </template>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="vew-360-labels">Latest Deployed Version:</div>
+                                <div class="vew-360-label-values slds-truncate"
+                                    title={status.LatestDeployedVersion}>
+                                    {status.LatestDeployedVersion}</div>
+                            </li>
+                            <li>
+                                <div class="vew-360-labels">Package Deploy Time:</div>
+                                <div class="vew-360-label-values slds-truncate"
+                                    title={status.PackageDeployTime}>
+                                    {status.PackageDeployTime}</div>
+                            </li>
+                            <!-- Add more PDT data here -->
+                        </ul>
+                    </template>
+                </div>
+            </li>
+        </ul>
+        <!--Footer part-->
+        <ul class="slds-list_horizontal view-360-card-footer-list">
+            <li>
+                <button>Digital AI</button>
+            </li>
+            <li>
+                <button>Contributors</button>
+            </li>
+            <li>
+                <button data-sandbox={sandboxName} data-color={cardColor} data-tabname="Info" data-package={packageName}
+                    onclick={navigateToInfoPage}>Info</button>
+            </li>
+        </ul>
+        <!--Footer part-->
+    </div>
+</template>

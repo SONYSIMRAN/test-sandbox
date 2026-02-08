@@ -1,0 +1,38 @@
+<template>
+    <div class="env-gate-popup text-white m-0">
+        <template lwc:if={statusSummary}>
+            <ul class="list-group custom-scroll border-bottom border-secondary" style="max-height: 200px; overflow-y:auto;">
+                <template for:each={statusSummary} for:item="status">
+                    <li key={status.key} title={status.key} class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-0 rounded-0 my-0">
+                        <span class="text-light">{status.key}</span>
+                        <span class="badge border border-info rounded-pill">
+                            <c-dx-vis-env-gate-status-child status={status.value}></c-dx-vis-env-gate-status-child>
+                        </span>
+                    </li>
+                </template>
+            </ul>
+        </template>
+
+        <template lwc:if={enabledValueData}>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-0 rounded-0 my-0">
+                    <span class="text-light fs-6 text-info">Name</span>
+                    <span class="text-light fs-6 text-info">Enabled</span>
+                </li>
+            </ul>
+            <ul class="list-group custom-scroll" style="max-height: 100px; overflow-y:auto;">
+                <template for:each={enabledValueData} for:item="val">
+                    <li key={val.name} title={val.name}
+                        class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-0 rounded-0 my-0">
+                        <span class="text-light">{val.name}</span>
+                        <span class="badge border border-info rounded-pill">
+                            <c-dx-vis-env-status-E-V-child value={val.enabled}></c-dx-vis-env-status-E-V-child>
+                        </span>
+                    </li>
+                </template>
+            </ul>
+        </template>
+        <!-- </div>
+        </div> -->
+    </div>
+</template>

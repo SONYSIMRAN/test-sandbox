@@ -1,0 +1,17 @@
+<template>
+    <template lwc:if={isLoadEnv}>
+        <template lwc:if={summaryRiskScore}>
+            <template for:each={summaryRiskScore} for:item="score">
+                <div key={score.id}>
+                    <c-package-quality-score is-load-env={isLoadEnv} percentage="100"
+                        profile={score.profile}></c-package-quality-score>
+                </div>
+            </template>
+        </template>
+    </template>
+    <template lwc:else>
+        <template lwc:if={sortScore}>
+            <c-package-quality-score progress-value={sortScore} percentage={sortScore}></c-package-quality-score>
+        </template>
+    </template>
+</template>

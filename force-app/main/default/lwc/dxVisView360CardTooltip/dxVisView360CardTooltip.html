@@ -1,0 +1,20 @@
+<template>
+    <template lwc:if={impactedPackage}>
+        <div class={tooltipClass} onclick={preventParentClick} data-package={item}>
+            <div class="risk-tooltip-arrow" style={tooltipPos}></div>
+            <template lwc:if={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="x-small"></lightning-spinner>
+            </template>
+            <template lwc:if={impactedPackages}>
+                <ul class="slds-has-dividers_bottom-space tooltip-overflow-auto dx-scroll">
+                    <template for:each={impactedPackages} for:item="item">
+                        <li key={item} title={item} class="slds-item slds-truncate slds-text-body_small">{item}</li>
+                    </template>
+                </ul>
+            </template>
+            <template lwc:if={emptyList}>
+                <div class="slds-text-body_small slds-text-align_center slds-p-vertical_x-small">Package count is {packageCount}</div>
+            </template>
+        </div>
+    </template>
+</template>

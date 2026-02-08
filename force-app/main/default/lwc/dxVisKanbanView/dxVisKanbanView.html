@@ -1,0 +1,30 @@
+<template>
+    <div class="bg-light">
+        <lightning-spinner if:true={isLoading}></lightning-spinner>
+        <c-dx-header card-view={cardView} kanban-view={kanbanView} list-view={listView}
+            button-package-dep={buttonPackageDep} button-sandbox-code-size={buttonSandboxCodeSize}
+            button-package-sorting={buttonPackageSorting} select-sandbox={selectSandbox}
+            sandbox-list={sandboxList} button-package-env-status={envStatusDashboard}></c-dx-header>
+
+        <!-- Body section -->
+        <div class="container my-3">
+            <div class="kanban-container d-flex">
+                <template for:each={result} for:item="item">
+                    <div class="kanban-col b-magenta" key={item.Name}>
+                        <div class="kanban-header center-content magenta">{item.Name}</div>
+                        <div class="kanban-content">
+                            <template for:each={item.Releases} for:item="release">
+                                <c-dx-vis-kanban-section section-header={release.Name} key={release.packageDeployTime}
+                                    section-data={release.Packages}></c-dx-vis-kanban-section>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <!-- Body Section -->
+
+        <!-- Footer Section -->
+        <c-dx-footer></c-dx-footer>
+    </div>
+</template>

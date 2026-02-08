@@ -1,0 +1,138 @@
+<template>
+    <div class="bg-light">
+        <lightning-spinner if:true={isLoading}></lightning-spinner>
+        <c-dx-header card-view={cardView} kanban-view={kanbanView} list-view={listView}
+            button-package-dep={buttonPackageDep} button-sandbox-code-size={buttonSandboxCodeSize}
+            button-package-sorting={buttonPackageSorting} combobox360-view={combobox360View}
+            view360-env-names={view360EnvNames} onchildmethod={getSandbox} sandbox-list={sandboxList} button-package-env-status={envStatusDashboard} env-gate-data={envGateData}></c-dx-header>
+
+
+        <!-- Body section -->
+        <div class="container my-3">    
+            <div>
+                <template lwc:if={filtereEnvData}>
+                    <div class="slds-p-bottom_medium slds-grid slds-gutters slds-grid_align-end combobox-hide-label">
+                        <div class="slds-col slds-size_auto">
+                            <c-dx-vis-version-dropdown
+                                versions={versions}
+                                selected-version={selectedVersion}
+                                onversionchange={handleVersionChange}>
+                            </c-dx-vis-version-dropdown>
+                        </div>
+                        <div class="slds-col slds-size_auto">
+                            <c-dx-vis-release-dropdown
+                                release-dates={releaseDates}
+                                selected-date={selectedDate}
+                                onreleasedatechange={handleReleaseDateChange}
+                                disabled={isReleaseDateDropdownDisabled}>
+                            </c-dx-vis-release-dropdown>
+                        </div>
+                        <div class="slds-col slds-size_auto">
+                            <lightning-button-icon icon-name="utility:refresh" alternative-text="Refresh" title="Refresh"
+                                onclick={handleRefreshReset}
+                                >
+                            </lightning-button-icon>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <div class="slds-box slds-p-around_none">
+                <!-- <template lwc:if={filtereEnvData}> -->
+                    <template if:true={filtereEnvData.length}>
+                    <template for:each={filtereEnvData} for:item="item">
+                        <template for:each={item} for:item="items">
+                            <!--Card content-->
+                            <div key={items.Name} class="view-360-box">
+                                <div
+                                    class="slds-p-around_x-small slds-border_bottom slds-border_top view-360-header slds-grid slds-grid_align-spread">
+                                    <div>
+                                        <c-dx-vis-view360-card-header
+                                            get-header-date={items.Name}></c-dx-vis-view360-card-header>
+                                    </div>
+                                    <div>
+                                        <ul class="slds-list_horizontal header-360-right-icons slds-m-around_none">
+                                            <li>
+                                                <div class="img-box"
+                                                data-id={items.Name}
+                                                data-type="risk"
+                                                onclick={handleIconClick}>
+                                                <img src={releaseRisk} />
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div 
+                                                class="img-box" 
+                                                data-id={items.Name}
+                                                data-type="status"
+                                                onclick={handleIconClick}
+                                                >
+                                                <img src={releaseStatus}/>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="img-box" 
+                                                data-id={items.Name}
+                                                data-type="packageCount"
+                                                onclick={handleIconClick}
+                                                ><img src={releasePackageCount} /></div>
+                                            </li>
+                                            <li>
+                                                <div class="img-box">
+                                                    <img src={releaseArtifact} data-id="a1" onclick={handleArtifactClick} />
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="view-360-grid slds-p-around_medium">
+                                    <template for:each={items.Packages} for:item="item">
+                                        <c-dx-vis-view360-card key={item.packageName} item={item}></c-dx-vis-view360-card>
+                                    </template>
+                                </div>
+                            </div>
+                            <!--Card content-->
+                            
+                        </template>
+                    </template>
+               
+                </template>
+                <!-- <template lwc:else> -->
+                    <template if:false={filtereEnvData.length}>
+                    <c-dx-vis-no-data-sfdx></c-dx-vis-no-data-sfdx>
+                </template>
+            </div>
+            <div>
+                <template if:true={showReleaseStatusTooltip}>
+                    <c-dx-vis-release-status-tooltip 
+                    packages={activeHeaderData} 
+                    is-visible={showTooltip}
+                    onclose={handleTooltipClose}></c-dx-vis-release-status-tooltip>
+                </template>
+            </div>
+            <div>
+                <template if:true={showPackageCountTooltip}>
+                    <c-dx-vis-release-package-count-tooltip 
+                    packages={activeHeaderData} 
+                    is-visible={showTooltip} 
+                    onclose={handleTooltipClose}>
+                    </c-dx-vis-release-package-count-tooltip>   
+                </template>
+            </div>
+            <div>
+                <template if:true={showRiskScoreTooltip}>
+                    <c-dx-vis-release-risk-tooltip 
+                    packages={activeHeaderData}
+                    is-visible={showTooltip} 
+                    position={popoverPosition}
+                    onclose={handleTooltipClose}>    
+                    </c-dx-vis-release-risk-tooltip>
+                </template>
+            </div>
+            
+        </div>
+        <!-- Body Section -->
+        
+        <!-- Footer Section -->
+        <c-dx-footer></c-dx-footer>
+    </div>
+</template>

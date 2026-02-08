@@ -1,0 +1,14 @@
+/* @import 'c/dxVisCssUtility'; */
+
+/*sfdx package*/
+.sfdx-package-card {
+    background: #fff;
+    border-radius: 5px;
+    border-top-width: 6px !important;
+}
+.sfdx-card-org-dep-yes {
+    border: 1px solid #f1736b;
+}
+.sfdx-card-org-dep-no {
+    border: 1px solid #65bf78;
+}

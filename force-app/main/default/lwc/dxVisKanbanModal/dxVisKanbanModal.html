@@ -1,0 +1,28 @@
+<template>
+    <lightning-modal-header class={content.color} label="Kanban Details Info"></lightning-modal-header>
+    <lightning-modal-body>
+        <!-- Tabs section -->
+        <lightning-tabset variant="scoped" active-tab-value="Info">
+            <lightning-tab onactive={handleActive} label="Info" value="Info">
+                <c-dx-vis-kanban-package-info item={content}></c-dx-vis-kanban-package-info>
+        </lightning-tab>
+        <template if:true={hidePackageCompare}>
+            <lightning-tab onactive={handleActive} label="Package Comparison" value="PackageComparison">
+                <c-dx-vis-package-compare message={activeValueMessage} item={content}></c-dx-vis-package-compare>                
+            </lightning-tab>
+        </template>
+            <lightning-tab onactive={handleActive} label="Package Dependencies" value="PackageDependencies">
+                <c-dx-vis-package-dep-graph item={content}></c-dx-vis-package-dep-graph>
+            </lightning-tab>
+            <template if:true={hideProdDiff}>
+                <lightning-tab onactive={handleActive} label="Prod Diff" value="ProdDiff">
+                    <c-dx-vis-package-diff></c-dx-vis-package-diff>
+                </lightning-tab>    
+            </template>
+        </lightning-tabset>
+        <!-- Tabs section -->
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button label="OK" onclick={handleOkay}></lightning-button>
+    </lightning-modal-footer>
+</template>

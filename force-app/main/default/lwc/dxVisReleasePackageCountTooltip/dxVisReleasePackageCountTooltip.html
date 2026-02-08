@@ -1,0 +1,15 @@
+<template>
+    <!-- <template if:true={isVisible}> -->
+        <section class="slds-popover dx-release-info-popover slds-nubbin_top slds-popover_alert tooltip-container" role="dialog">
+            <button class="slds-button slds-button_icon slds-popover__close slds-float_right" 
+            title="Close dialog" 
+            onclick={handleClose}>
+            <lightning-icon icon-name="utility:close" alternative-text="Close dialog" size="small"></lightning-icon>
+            <span class="slds-assistive-text">Close dialog</span>
+        </button>
+            <div class="slds-popover__body">
+                <p>Package Count: {packageCount}</p>
+            </div>
+        </section>
+    <!-- </template> -->
+</template>

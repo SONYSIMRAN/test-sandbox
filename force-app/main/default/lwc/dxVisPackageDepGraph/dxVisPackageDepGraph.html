@@ -1,0 +1,41 @@
+<template>
+    <div class="bg-light dxAppPage">
+        <lightning-spinner if:true={isLoading}></lightning-spinner>
+        <template if:true={headerConfig}>
+            <c-dx-header card-view={cardView} kanban-view={kanbanView} list-view={listView}
+                button-package-dep={buttonPackageDep} button-sandbox-code-size={buttonSandboxCodeSize}
+                button-package-sorting={buttonPackageSorting} select-sandbox={selectSandbox} sandbox-list={sandboxList}
+                onchildmethod={getSandbox} onpackagesorting={packageSorting}></c-dx-header>
+        </template>
+        <div class="container my-3">
+            <lightning-card title="Package Dependency" icon-name="custom:custom19">
+                <div id="chart" class="packageBubblesGraph"></div>
+            </lightning-card>
+            <div class="slds-m-vertical_small slds-box dependency-graph-box">
+                <div class="slds-m-vertical_x-small">
+                    <ul class="slds-list_horizontal slds-float_right">
+                        <li>
+                            <div class="dep-combobox">
+                                <lightning-combobox style="width: 150px;" name="packageSelection"
+                                    placeholder="Select package" options={packageOptions} value={selectedPackage}
+                                    onchange={handlePackageChange}></lightning-combobox>
+                            </div>
+                        </li>
+                        <li>
+                            <lightning-input type="checkbox" class="dependency-checkbox incoming-box" label="Incoming"
+                                checked={incomingChecked} onchange={handleCheckboxChange}></lightning-input>
+                        </li>
+                        <li>
+                            <lightning-input type="checkbox" label="Outgoing" class="dependency-checkbox outgoing-box"
+                                checked={outgoingChecked} onchange={handleCheckboxChange}></lightning-input>
+                        </li>
+                    </ul>
+                </div>
+                <div class="networkGraph">
+                </div>
+            </div>
+        </div>
+        <!-- Footer Section -->
+        <c-dx-footer></c-dx-footer>
+    </div>
+</template>

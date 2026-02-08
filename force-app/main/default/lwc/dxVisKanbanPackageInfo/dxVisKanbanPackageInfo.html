@@ -1,0 +1,204 @@
+<template>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="border m-2 shadow">
+                <div class="p-2 my-2 mx-2" onclick={openNewTab}>
+                    <div class="small fw-bold">Consolidated Score</div>
+                    <c-dx-progress-utils custom-progress={customProgress}
+                        percentage={item.codeQuality.detail.coverage}></c-dx-progress-utils>
+                </div>
+                <hr>
+
+                <div class="p-2 my-2 mx-2" onclick={openNewTab}>
+                    <div class="small fw-bold">Code Quality</div>
+                    <c-dx-progress-utils custom-grade={customGrade}
+                        grade={item.codeQuality.detail.quality}></c-dx-progress-utils>
+                </div>
+                <hr>
+
+                <div class="p-2 my-2 mx-2">
+                    <div class="small fw-bold">Code Coverage</div>
+                    <c-dx-progress-utils custom-progress={customProgress}
+                        percentage={item.codeQuality.detail.coverage}></c-dx-progress-utils>
+                </div>
+                <hr>
+
+                <div class="p-2 my-2 mx-2">
+                    <div class="small fw-bold">Automation</div>
+                    <c-dx-progress-utils custom-progress={customProgress}
+                        percentage={item.codeQuality.detail.automation}></c-dx-progress-utils>
+                </div>
+                <hr>
+
+                <div class="p-2 my-2 mx-2">
+                    <div class="small fw-bold">Dependency</div>
+                    <c-dx-progress-utils custom-grade={customGrade}
+                        grade={item.codeQuality.detail.dependency}></c-dx-progress-utils>
+                </div>
+                <hr>
+
+                <div class="p-2 my-2 mx-2">
+                    <div class="small fw-bold">Performance</div>
+                    <c-dx-progress-utils custom-progress={customProgress}
+                        percentage={item.codeQuality.detail.performance}></c-dx-progress-utils>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="badge rounded-pill bg-primary m-2 fs-6 mb-0 px-4 border border-dark">Coverage Summary</div>
+            <div class="m-2 border p-2 shadow" style="max-height: 526px; overflow-y : auto; overflow-x: hidden">
+                <template if:true={codeCoverageLoader}>
+                    <c-dx-vis-loader></c-dx-vis-loader>
+                </template>
+                <template lwc:if={codeCoverageFile}>
+                    <div class="row">
+                        <template for:each={coverageSummary} for:item="item">
+                            <div key={item.key} class="col-md-6">
+                                <div class=" border border-info m-1 p-1 bg-light">
+                                    <label html-for={item.key}
+                                        class="form-label text-secondary small text-capitalize">{item.key}</label>
+                                    <div id={item.value} title={item.value} class="text-truncate form-label"
+                                        style="max-width: '90%'">{item.value}</div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <template lwc:if={degradationStatus}>
+                    <div class="form-label text-secondary small text-capitalize">Degradation Status</div>
+                    <div class="row">
+                        <template for:each={degradationStatus} for:item="item">
+                            <div key={item.key} class="col-md-6">
+                                <div class=" border border-info m-1 p-1 bg-light">
+                                    <label html-for={item.key}
+                                        class="form-label text-secondary small text-capitalize">{item.key}</label>
+                                    <div id={item.value} title={item.value} class="text-truncate form-label"
+                                        style="max-width: '90%'">{item.value}</div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <template lwc:if={coverageData}>
+                    <c-dx-vis-no-data></c-dx-vis-no-data>
+                </template>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="badge rounded-pill bg-primary m-2 fs-6 mb-0 px-4 border border-dark">Deployment File</div>
+            <div class="m-2 border p-2 shadow" style="max-height: 526px; overflow-y : auto; overflow-x: hidden">
+                <template if:true={deploymentFileLoader}>
+                    <c-dx-vis-loader></c-dx-vis-loader>
+                </template>
+                <template lwc:if={deploymentFile}>
+                    <div class="row">
+                        <template for:each={deploymentFileData} for:item="item">
+                            <div key={item.key} class="col-md-6">
+                                <div class=" border border-info m-1 p-1 bg-light">
+                                    <label html-for={item.key}
+                                        class="form-label text-secondary small text-capitalize">{item.key}</label>
+                                    <div id={item.value} title={item.value} class="text-truncate form-label"
+                                        style="max-width: '90%'">{item.value}</div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <template lwc:if={package2}>
+                    <div class="form-label text-secondary small text-capitalize">Package2</div>
+                    <div class="row">
+                        <template for:each={package2} for:item="item">
+                            <div key={item.key} class="col-md-6">
+                                <div class=" border border-info m-1 p-1 bg-light">
+                                    <label html-for={item.key}
+                                        class="form-label text-secondary small text-capitalize">{item.key}</label>
+                                    <div id={item.value} title={item.value} class="text-truncate form-label"
+                                        style="max-width: '90%'">{item.value}</div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <template lwc:if={attributes}>
+                    <div class="form-label text-secondary small text-capitalize">Attributes</div>
+                    <div class="row">
+                        <template for:each={attributes} for:item="item">
+                            <div key={item.key} class="col-md-6">
+                                <div class=" border border-info m-1 p-1 bg-light">
+                                    <label html-for={item.key}
+                                        class="form-label text-secondary small text-capitalize">{item.key}</label>
+                                    <div id={item.value} title={item.value} class="text-truncate form-label"
+                                        style="max-width: '90%'">{item.value}</div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <template lwc:if={deploymentData}>
+                    <c-dx-vis-no-data></c-dx-vis-no-data>
+                </template>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="badge rounded-pill bg-info m-2 fs-6 mb-0 px-4 border border-secondary text-dark">Code Scan
+                Report</div>
+        </div>
+        <div class="col-md-7 pt-2">
+            <div class="d-flex mx-4 justify-content-end">
+                <div class="fst-italic mx-2 small fw-bold" style="line-height: '28px'">Score: </div>
+                <div>
+                    <c-dx-progress-utils custom-grade={customGrade} grade={codeScanReportScore}></c-dx-progress-utils>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="m-2 border p-2 shadow" style="max-height: '250px'; overflow-y: 'auto'; overflow-x: 'hidden'">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Metrics</th>
+                            <th>Value</th>
+                            <th>Best Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template lwc:if={codeScanReportDetail}>
+                            <template for:each={codeScanReportDetail} for:item="el">
+                                <tr key={el.value}>
+                                    <td class="text-capitalize">{el.metric}</td>
+                                    <td>
+                                        <div class="text-truncate" style="max-width: 90%">{el.value}</div>
+                                    </td>
+                                    <td>
+                                        <div class="text-truncate" style="max-width: 90%">
+                                            <template if:true={el.bestValue}>
+                                                <span class="badge rounded-pill bg-success border border-secondary"
+                                                    style="min-width: 60px">Yes</span>
+                                            </template>
+                                            <template if:false={el.bestValue}>
+                                                <span
+                                                    class="badge rounded-pill bg-warning border border-secondary text-dark"
+                                                    style="min-width: 60px">No</span>
+                                            </template>
+                                            <!-- <span class="badge rounded-pill bg-success border border-secondary"
+                                                style="min-width: 60px">Yes</span> :
+                                            <span class="badge rounded-pill bg-warning border border-secondary text-dark"
+                                                style="min-width: 60px">No</span> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                        </template>
+                        <template if:false={codeScanReportDetail}>
+                            <tr>
+                                <td>
+                                    <c-dx-vis-no-data></c-dx-vis-no-data>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>

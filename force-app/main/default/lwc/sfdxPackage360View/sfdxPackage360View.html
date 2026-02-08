@@ -1,0 +1,146 @@
+<template>
+    <div class="bg-light">
+    <lightning-spinner if:true={isLoading}></lightning-spinner>
+    <template if:true={organizedData}>
+        <div class="slds-p-around_x-small">
+            <c-dx-header  package-data={packageData} card-view={cardView} kanban-view={kanbanView} list-view={listView}
+            button-package-dep={buttonPackageDep} button-sandbox-code-size={buttonSandboxCodeSize}
+            selected-sandbox={selectedSandbox} sandbox-options={sandboxOptions}  onsandboxchange={handleSandboxChange}
+            button-metrics-dashboard={buttonMetricsDashboard} button-package-sorting={buttonPackageSorting}
+            select-sandbox={selectSandbox} sandbox-list={sandboxList} onchildmethod={getSandbox}
+            onpackagesorting={packageSorting} onselectedsourcechange={handleSelectedSourceChange}></c-dx-header>
+        </div>
+        <div class="container slds-p-around_medium">
+            <div>
+                <template lwc:if={organizedData}>
+                    <div class="slds-p-bottom_medium slds-grid slds-gutters slds-grid_align-end combobox-hide-label">
+                        <div class="slds-col slds-size_auto">
+                            <c-dx-vis-version-dropdown
+                                versions={versions}
+                                selected-version={selectedVersion}
+                                onversionchange={handleVersionChange}>
+                            </c-dx-vis-version-dropdown>
+                        </div>
+                        <div class="slds-col slds-size_auto">
+                            <c-dx-vis-release-dropdown
+                                release-dates={releaseDates}
+                                selected-date={selectedDate}
+                                onreleasedatechange={handleReleaseDateChange}
+                                disabled={isReleaseDateDropdownDisabled}>
+                            </c-dx-vis-release-dropdown>
+                        </div>
+                        <div class="slds-col slds-size_auto">
+                            <lightning-button-icon icon-name="utility:refresh" alternative-text="Refresh" title="Refresh"
+                                onclick={handleRefreshReset}
+                                >
+                            </lightning-button-icon>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <div class="slds-border_left slds-border_right slds-border_bottom">
+            <template for:each={organizedData} for:item="versionGroup">
+                <div key={versionGroup.versionName} class="">
+                    <div
+                        class="slds-p-around_x-small slds-border_bottom slds-border_top view-360-header slds-grid slds-grid_align-spread">
+                        <div>
+                            <c-dx-vis-view360-card-header
+                                get-header-date={versionGroup.versionName}></c-dx-vis-view360-card-header>
+                        </div>
+                        <div>
+                            <ul class="slds-list_horizontal header-360-right-icons slds-m-around_none">
+                                <li>
+                                    <div class="img-box"><img src={releaseRisk} /></div>
+                                </li>
+                                <li>
+                                    <div class="img-box"><img src={releaseStatus} /></div>
+                                </li>
+                                <li>
+                                    <div class="img-box"><img src={releasePackageCount} /></div>
+                                </li>
+                                <li>
+                                    <!-- <div class="img-box"><img src={releaseArtifact} /></div> -->
+                                    <div class="img-box">
+                                        <img src={releaseArtifact} data-id="a1" onclick={handleArtifactClick} />
+                                    </div>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+                    <div class="view-360-grid slds-p-around_medium">
+                        <template for:each={versionGroup.packages} for:item="pkg">
+                            <div key={pkg.PackageName} class="slds-border_bottom slds-border_top slds-border_left slds-border_right slds-border_custom">
+                                <div class="slds-box_header slds-p-around_x-small slds-theme_shade slds-border_bottom">
+                                    <div class="slds-grid slds-grid_align-spread">
+                                        <div class="package-title">{pkg.PackageName} ({pkg.Version})</div>
+                                    </div>
+                                </div>
+                                <div class="slds-p-around_x-small">
+                                    <div class="metric">
+                                        <span class="slds-truncate vew-360-labels">Description</span>
+                                        <span class="vew-360-label-values">{pkg.Description}</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="slds-truncate vew-360-labels">Package ID</span>
+                                        <span class="vew-360-label-values">{pkg.SubscriberPackageId}</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="slds-truncate vew-360-labels">Version</span>
+                                        <span class="vew-360-label-values">{pkg.Version}</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="slds-truncate vew-360-labels">Is Beta </span> 
+                                        <span class="vew-360-label-values"><c-dx-vis-text-info text-type={pkg.IsBeta}></c-dx-vis-text-info></span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="slds-truncate vew-360-labels">Is Managed</span>
+                                        <!-- <span>{pkg.IsManaged}</span> -->
+                                        <span class="vew-360-label-values"><c-dx-vis-text-info text-type={pkg.IsManaged}></c-dx-vis-text-info></span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="slds-truncate vew-360-labels">Is Org Dependent</span>
+                                        <!-- <span>{pkg.IsOrgDependent}</span> -->
+                                        <span class="vew-360-label-values"><c-dx-vis-text-info text-type={pkg.IsOrgDependent}></c-dx-vis-text-info></span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="slds-truncate vew-360-labels">Is Password Protected</span>
+                                        <!-- <span>{pkg.IsPasswordProtected}</span> -->
+                                        <span class="vew-360-label-values"><c-dx-vis-text-info text-type={pkg.IsPasswordProtected}></c-dx-vis-text-info></span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="slds-truncate vew-360-labels">Package Container Options</span>
+                                        <span class="vew-360-label-values">{pkg.Package2ContainerOptions}</span>
+                                    </div>
+                                    <!-- Additional metrics can be added here -->
+                                </div>
+                                <div class="slds-p-horizontal_x-small slds-p-bottom_x-small">
+                                    <ul class="slds-list_horizontal view-360-card-footer-list">
+                                        <!-- <li>
+                                            <button>Digital AI</button>
+                                        </li>
+                                        <li>
+                                            <button>Contributors</button>
+                                        </li> -->
+                                        <li>
+                                            <button data-color={cardColor} data-tabname="Info">Info</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </div>
+        </div>
+        <div>
+            <template lwc:if={isSalesforceUser}>
+                <c-sfdx-footer></c-sfdx-footer>
+            </template>
+        </div>
+    </template>
+    </div>
+    <template if:false={organizedData}>
+        <c-dx-vis-no-data-sfdx></c-dx-vis-no-data-sfdx>
+    </template>
+</template>

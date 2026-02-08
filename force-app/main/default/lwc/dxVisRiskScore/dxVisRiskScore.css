@@ -1,0 +1,19 @@
+.risk-high {
+    color: #CC0A0A; /* Red color for high risk */
+    font-weight: bold;
+}
+
+.risk-medium {
+    color: #FFD700; /* Yellow color for medium risk */
+    font-weight: bold;
+}
+
+.risk-low {
+    color: #3AA157; /* Green color for low risk */
+    font-weight: bold;
+}
+
+.risk-unknown {
+    color: #808080; /* Gray color for unknown risk or default */
+    /* font-weight: bold; */
+}

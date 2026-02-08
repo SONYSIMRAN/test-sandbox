@@ -1,0 +1,34 @@
+.orange {
+    background-color: #fd7e14;
+    color: #343a40;
+}
+.lime-green {
+    background-color: #68d168;
+    color: #343a40;
+}
+.magenta {
+    background-color: #d105d1;
+    color: #fff;
+}
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.cardHeader div {
+    padding: 10px;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    border-radius: 4px;
+    color: #fff;
+}
+.cardHeader div:first-child {
+    padding: 10px 24px;
+    color: #0d6efd;
+}
+.bg-pinkbtn {
+    background: #f1736b;
+}
+.bg-greenbtn {
+    background: #65bf78;
+}

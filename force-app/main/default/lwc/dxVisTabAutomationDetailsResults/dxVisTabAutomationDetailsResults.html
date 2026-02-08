@@ -1,0 +1,114 @@
+<template>
+    <template lwc:if={details}>
+        <template if:true={ZTT}>
+            <div
+                class="badge border border-primary text-dark text-capitalize px-2 position-relative mx-2 p-2 position-relative">
+                ZTT Results
+                <template lwc:if={ZTTResults}>
+                    <span class="position-absolute top-0 start-100 translate-middle badge bg-primary info-text">
+                        {ZTTResults}
+                        <span class="visually-hidden">ZTT Results</span>
+                    </span>
+                </template>
+                <template lwc:else>
+                    <span class="position-absolute top-0 start-100 translate-middle badge bg-primary text-white">
+                        --
+                        <span class="visually-hidden">No ZTT Results</span>
+                    </span>
+                </template>
+            </div>
+            <div
+                class="badge border border-primary text-dark text-capitalize px-2 position-relative mx-2 p-2 position-relative mx-4">
+                ZTT Status
+                <template if:true={ZTTStatus}>
+                    <span
+                        class="info-text text-capitalize position-absolute top-0 start-100 translate-middle badge bg-success">
+                        Pass
+                        <span class="visually-hidden">ZTT Status</span>
+                    </span>
+                </template>
+                <template if:false={ZTTStatus}>
+                    <span
+                        class="info-text text-capitalize position-absolute top-0 start-100 translate-middle badge bg-danger">
+                        Fail
+                        <span class="visually-hidden">ZTT Status</span>
+                    </span>
+                </template>
+
+            </div>
+            <div
+                class="badge border border-primary text-dark text-capitalize px-2 position-relative mx-2 p-2 position-relative">
+                Execution Status
+                <template if:true={exeTestStatus}>
+                    <span
+                        class="info-text text-capitalize position-absolute top-0 start-100 translate-middle badge bg-danger">
+                        Fail
+                        <span class="visually-hidden">Execution Status</span>
+                    </span>
+                </template>
+                <template if:false={exeTestStatus}>
+                    <span
+                        class="info-text text-capitalize position-absolute top-0 start-100 translate-middle badge bg-success">
+                        Pass
+                        <span class="visually-hidden">Execution Status</span>
+                    </span>
+                </template>
+
+            </div>
+        </template>
+        <template if:true={PDT}>
+            <div
+                class="badge border border-primary text-dark text-capitalize px-2 position-relative mx-2 p-2 position-relative">
+                PDT Results
+                <template lwc:if={PDTResults}>
+                    <span class="position-absolute top-0 start-100 translate-middle badge bg-primary info-text">
+                        {PDTResults}
+                        <span class="visually-hidden">PDT Results</span>
+                    </span>
+                </template>
+                <template lwc:else>
+                    <span class="position-absolute top-0 start-100 translate-middle badge bg-primary info-text">
+                        --
+                        <span class="visually-hidden">No PDT Results</span>
+                    </span>
+                </template>
+            </div>
+            <div
+                class="badge border border-primary text-dark text-capitalize px-2 position-relative mx-2 p-2 position-relative mx-4">
+                PDT Status
+                <template if:true={PDTStatus}>
+                    <span
+                        class="info-text text-capitalize position-absolute top-0 start-100 translate-middle badge bg-success">
+                        Pass
+                        <span class="visually-hidden">PDT Status</span>
+                    </span>
+                </template>
+                <template if:false={PDTStatus}>
+                    <span
+                        class="info-text text-capitalize position-absolute top-0 start-100 translate-middle badge bg-danger">
+                        Fail
+                        <span class="visually-hidden">PDT Status</span>
+                    </span>
+                </template>
+            </div>
+            <div
+                class="badge border border-primary text-dark text-capitalize px-2 position-relative mx-2 p-2 position-relative">
+                Execution Status
+                <template if:true={exeTestStatus}>
+                    <span
+                        class="info-text text-capitalize position-absolute top-0 start-100 translate-middle badge bg-danger">
+                        Fail
+                        <span class="visually-hidden">Execution Status</span>
+                    </span>
+                </template>
+                <template if:false={exeTestStatus}>
+                    <span
+                        class="info-text text-capitalize position-absolute top-0 start-100 translate-middle badge bg-success">
+                        Pass
+                        <span class="visually-hidden">Execution Status</span>
+                    </span>
+                </template>
+            </div>
+        </template>
+    </template>
+</template>

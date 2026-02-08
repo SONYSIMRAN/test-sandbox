@@ -1,0 +1,11 @@
+<template>
+        <template lwc:if={getNoData}>
+                <c-dx-vis-no-data message="No Data Available"></c-dx-vis-no-data>
+        </template>
+        <template lwc:if={enabledValue}>
+                <span class="text-success" title="true">true</span>
+        </template>
+        <template lwc:else>
+                <span class="text-danger" title="false">false</span>
+        </template>
+</template>

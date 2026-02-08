@@ -1,0 +1,59 @@
+<template>
+    <div class="sfdx-footer">
+        <ul class="slds-list_horizontal">
+            <li class="slds-p-around_small slds-border_right">
+                <img style="width: 130px;" alt="Allegis Group" src={logoFooter}>
+            </li>
+            <li class="slds-p-around_small">
+                <ul class="slds-list_horizontal">
+                    <li>
+                        <div class="slds-box slds-m-right_small sfdx-footer-card">
+                            <div class="slds-p-bottom_x-small dx-font-bold">Org Depedent(Card Header)</div>
+                            <ul class="slds-list_horizontal">
+                                <li class="dx-text-center">
+                                    <div class="org-dep-color org-dep-box"></div>
+                                    YES
+                                </li>
+                                <li class="dx-text-center">
+                                    <div class="org-indep-color org-dep-box"></div>
+                                    NO
+                                </li>
+                                <li class="dx-text-center">
+                                    <div class="org-na-color org-dep-box"></div>
+                                    NA
+                                </li>
+                            </ul>
+                            <div class="slds-text-body_small slds-p-top_small">Source: <a href="#">Package Card Header</a></div>
+                        </div>
+                    </li>
+                    <!--Request for user-->
+                    <li>
+                        <div class="slds-box slds-m-right_small sfdx-footer-card">
+                            <div class="slds-p-bottom_x-small dx-font-bold">Request for User</div>
+                            <div class="slds-p-vertical_xx-small lgc-bg">
+                                <lightning-input type="email" style="font-size: 11px;" label="Email address" placeholder="type here..." onchange={handleEmailAddress} value={emailAddress}
+                                    required></lightning-input>
+                                <!-- <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="textarea-id-01">
+                                        <abbr class="slds-required" title="required">*</abbr>User Objective</label>
+                                    <div class="slds-form-element__control">
+                                        <textarea style="resize: none;" id="textarea-id-01" required="" placeholder="type here…"
+                                            class="slds-textarea"></textarea>
+                                    </div>
+                                </div> -->
+                                <lightning-textarea name="input1" style="font-size: 11px;" label="User Objective" required placeholder="type here…" onchange={handleUserObjective} value={userObjective}></lightning-textarea>
+                            </div>
+                            <div class="slds-m-top_medium">
+                                <!-- Button to send the email -->
+                                <lightning-button label="Send" variant="brand" onclick={sendEmail}></lightning-button>
+                            </div>
+
+                        </div>
+                    </li>
+                    <!--Request for user-->
+                </ul>
+            </li>
+        </ul>
+        <div class="sfdx-footer-copiright slds-p-around_small">Copyright © 2024, All Rights Reserved Allegis group</div>
+    </div>
+</template>

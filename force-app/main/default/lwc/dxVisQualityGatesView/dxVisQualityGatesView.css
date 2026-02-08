@@ -1,0 +1,46 @@
+/* dxVisQualityGatesView.css */
+.table-wrapper {
+    /* max-height: 400px; /* Set a maximum height for vertical scrolling */
+    /* overflow-y: auto; Enable vertical scrolling */
+    /* overflow-x: auto; Enable horizontal scrolling */
+    border: 1px solid #d8dde6;
+}
+
+.table-wrapper table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.quality-gate-table th,
+.quality-gate-table td {
+    font-size: 13px;
+}
+.quality-gate-table th {
+    border: 1px solid #ebebeb;
+    background: #dbdbdb;
+    overflow: unset;
+}
+.quality-gate-table tr.env-gate-sticky-header:nth-child(1) {
+    position: sticky;
+    top: 127px;
+    z-index: 1;
+}
+.quality-gate-table tr.env-gate-sticky-header:nth-child(2) {
+    position: sticky;
+    top: 154px;
+    z-index: 1;
+}
+
+.ld-version-label {
+    font-size: 10px;
+    color: #888888;
+    margin-top: 5px;
+}
+.ld-version-value{
+    font-size: 11px;
+    color: #0d0d0d;
+}
+.envgate-header-dropdown {
+    z-index: 2;
+    position: relative;
+}

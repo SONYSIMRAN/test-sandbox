@@ -1,0 +1,194 @@
+<template>
+    <div class="card card">
+        <div class={activeCardClass} id="except-0" onclick={preventParentClick}>
+
+            <div class="card-header justify-content-between bg-gradient" style={cardColor}>
+                    <div class="center-content start-content text-truncate d-flex">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="cube"
+                            class="svg-inline--fa fa-cube fa-2x Icon_whit" role="img" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                d="M234.5 5.709C248.4 .7377 263.6 .7377 277.5 5.709L469.5 74.28C494.1 83.38 512 107.5 512 134.6V377.4C512 404.5 494.1 428.6 469.5 437.7L277.5 506.3C263.6 511.3 248.4 511.3 234.5 506.3L42.47 437.7C17 428.6 0 404.5 0 377.4V134.6C0 107.5 17 83.38 42.47 74.28L234.5 5.709zM256 65.98L82.34 128L256 190L429.7 128L256 65.98zM288 434.6L448 377.4V189.4L288 246.6V434.6z">
+                            </path>
+                        </svg>
+                        <h2 class="text-truncate pt-1 mx-1 card-title" title={item.packageName}>
+                            {item.packageName}
+                        </h2>
+                    </div>
+            </div>
+            <div class="p-2 card-body slds-p-around_x-small">
+                <div class="package-details">
+                    <template if:true={item.Version}>
+                        <p title="55.0.1.1" class="text-truncate small"><strong>Version: </strong>
+                            {item.Version}</p>
+                    </template>
+                    <template if:true={item.PackageVersionName}>
+                        <p title="55.0.1.1" class="text-truncate small"><strong>Deployed: </strong>
+                            {item.PackageVersionName}</p>
+                    </template>
+                    <template if:true={item.Branch}>
+                        <p class="text-truncate small" title="develop"><strong>Branch: </strong>
+                            {item.Branch}
+                        </p>
+                    </template>
+                    <template if:true={item.packageDeployTime}>
+                        <p class="text-truncate small" title="8/10/2023 5:07:49 PM">
+                            <strong>Deployed: </strong> {item.packageDeployTime}
+                        </p>
+                    </template>
+                    <template if:true={item.codeQuality}>
+                        <div class="d-flex justify-content-between mb-2">
+                            <div class="mt-3 small"><strong>Package Quality: </strong></div>
+                            <div class="d-flex">
+                                <div role="button" class="round p-1 delta-arrows me-2">
+                                    <template lwc:if={progress}>
+                                        <!-- <img alt="Progress" type="svg" src={iconDeltaUp} /> -->
+                                        <span class="arrow arrow-up"></span>
+                                        <span class="arrow arrow-up arrow-up1"></span>
+                                    </template>
+                                    <template lwc:elseif={degrade}>
+                                        <!-- <img alt="Degrade" type="svg" src={iconDeltaDown} /> -->
+                                        <span class="arrow arrow-down"></span>
+                                        <span class="arrow arrow-down arrow-down1"></span>
+                                    </template>
+                                    <template lwc:elseif={steady}>
+                                        <!-- <img alt="Steady" type="svg" src={iconDeltaSteady} /> -->
+                                        <span class="arrow arrow-right"></span>
+                                        <span class="arrow arrow-right arrow-right"></span>
+                                    </template>
+                                    <template lwc:elseif={loadingGear}>
+                                        <img alt="Steady" type="svg" src={iconGearAnimated} />
+                                    </template>
+                                    <template lwc:else>
+                                        <img alt="" type="svg" src={iconGearNormal} />
+                                    </template>
+                                </div>
+                                <div onclick={packageCardClick} data-package={item.packageName}
+                                    data-sandbox={item.sandbox} class="cursor-pointer">
+                                    <template if:true={item.codeQuality}>
+                                        <c-package-quality-score progress-value={item.codeQuality.consolidatedScore}
+                                            percentage={item.codeQuality.consolidatedScore}>
+                                        </c-package-quality-score>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <!-- Detail Container -->
+                    <template if:true={item.codeQuality}>
+                        <div class="slide position-relative border border-secondary rounded p-2 pt-3 px-1 mt-3">
+                            <span class="quality-details fst-italic badge bg-primary">Details</span>
+                            <div class="border-bottom border-secondary pb-1">
+                                <div class="d-flex justify-content-between pt-1">
+                                    <div class="small fw-bold">
+                                        <div class="link-light label-link">Quality
+                                        </div>
+                                    </div>
+                                    <c-dx-progress-utils custom-grade={customGrade}
+                                        grade={item.codeQuality.detail.quality}></c-dx-progress-utils>
+                                </div>
+                            </div>
+                            <div class="border-bottom py-1 border-secondary">
+                                <div class="d-flex  justify-content-between">
+                                    <div class="data-progress small fw-bold">
+                                        <div class="link-light label-link dx-link"
+                                        onclick={navigateToInfoPage} 
+                                        data-sandbox={item.sandbox} 
+                                        data-color={cardColor}
+                                        data-package={item.packageName}
+                                        data-tabname="ApexCoverage">
+                                        Coverage
+                                        </div>
+                                    </div>
+                                    <c-dx-progress-utils custom-progress={customProgress}
+                                        percentage={item.codeQuality.detail.coverage}></c-dx-progress-utils>
+                                </div>
+                            </div>
+                            <div class="border-bottom py-1 border-secondary">
+                                <div class="d-flex  justify-content-between">
+                                    <div class="data-progress small fw-bold">
+                                        <!-- <div class="link-light label-link">
+                                            Automation
+                                        </div> -->
+                                        <div class="link-light label-link dx-link" 
+                                        onclick={navigateToInfoPage} 
+                                        data-sandbox={item.sandbox} 
+                                        data-color={cardColor}
+                                        data-package={item.packageName}
+                                        data-tabname="Automation">
+                                        Automation
+                                        </div>
+                                    </div>
+                                    <c-dx-progress-utils custom-progress={customProgress}
+                                        percentage={item.codeQuality.detail.automation}></c-dx-progress-utils>
+                                </div>
+                            </div>
+                            <div class="py-1 border-bottom border-secondary">
+                                <div class="d-flex  justify-content-between">
+                                    <div class="data-progress small fw-bold">
+                                        <div class="link-light label-link dx-link"
+                                        onclick={navigateToInfoPage} 
+                                        data-sandbox={item.sandbox} 
+                                        data-color={cardColor}
+                                        data-package={item.packageName}
+                                        data-tabname="PerformanceTest">
+                                        Performance
+                                        </div>
+                                    </div>
+                                    <c-dx-progress-utils custom-progress={customProgress}
+                                        percentage={item.codeQuality.detail.performance}></c-dx-progress-utils>
+                                </div>
+                            </div>
+                            <div class="pt-1">
+                                <div class="d-flex justify-content-between pt-1">
+                                    <div class="small fw-bold">
+                                        <div class="link-light label-link dx-link"
+                                        onclick={navigateToInfoPage} 
+                                        data-sandbox={item.sandbox} 
+                                        data-color={cardColor}
+                                        data-package={item.packageName}
+                                        data-tabname="DependencyScore">
+                                        Dependency
+                                        </div>
+                                    </div>
+                                    <c-dx-progress-utils custom-grade={customGrade}
+                                        grade={item.codeQuality.detail.dependency}></c-dx-progress-utils>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <!-- Detail Container -->
+                </div>
+            </div>
+            <div class="card-foote card-footer slds-p-around_x-small slds-border_top">
+                <template lwc:if={item.isSalesforceUser}>
+                    <lightning-icon icon-name='action:more'  onclick={handleInstalledPackageDetails} data-id={item.id} data-package={item.packageName} alternative-text='more' size='x-small'
+                        title='Package Detail'></lightning-icon>
+                </template>
+                <template lwc:else>
+                    <button type="button" title="Package Compare" onclick={handlePackageCompare}
+                        class="btn btn-outline-secondary btn-sm" aria-label="Package Compare">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="code-compare"
+                            class="svg-inline--fa fa-code-compare fa-sm Icon_grey" role="img"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                d="M320 488C320 497.5 314.4 506.1 305.8 509.9C297.1 513.8 286.1 512.2 279.9 505.8L199.9 433.8C194.9 429.3 192 422.8 192 416C192 409.2 194.9 402.7 199.9 398.2L279.9 326.2C286.1 319.8 297.1 318.2 305.8 322.1C314.4 325.9 320 334.5 320 344V384H336C371.3 384 400 355.3 400 320V153.3C371.7 140.1 352 112.8 352 80C352 35.82 387.8 0 432 0C476.2 0 512 35.82 512 80C512 112.8 492.3 140.1 464 153.3V320C464 390.7 406.7 448 336 448H320V488zM456 79.1C456 66.74 445.3 55.1 432 55.1C418.7 55.1 408 66.74 408 79.1C408 93.25 418.7 103.1 432 103.1C445.3 103.1 456 93.25 456 79.1zM192 24C192 14.52 197.6 5.932 206.2 2.076C214.9-1.78 225-.1789 232.1 6.161L312.1 78.16C317.1 82.71 320 89.2 320 96C320 102.8 317.1 109.3 312.1 113.8L232.1 185.8C225 192.2 214.9 193.8 206.2 189.9C197.6 186.1 192 177.5 192 168V128H176C140.7 128 112 156.7 112 192V358.7C140.3 371 160 399.2 160 432C160 476.2 124.2 512 80 512C35.82 512 0 476.2 0 432C0 399.2 19.75 371 48 358.7V192C48 121.3 105.3 64 176 64H192V24zM56 432C56 445.3 66.75 456 80 456C93.25 456 104 445.3 104 432C104 418.7 93.25 408 80 408C66.75 408 56 418.7 56 432z">
+                            </path>
+                        </svg>
+                    </button>
+                    <button type="button" data-sandbox={item.sandbox} data-color={cardColor}
+                        data-package={item.packageName} onclick={navigateToInfoPage} title="More Info"
+                        class="btn btn-secondary btn-sm" aria-label="More Info">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="up-right-from-square"
+                            class="svg-inline--fa fa-up-right-from-square fa-sm Icon_white" role="img"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                d="M384 320c-17.67 0-32 14.33-32 32v96H64V160h96c17.67 0 32-14.32 32-32s-14.33-32-32-32L64 96c-35.35 0-64 28.65-64 64V448c0 35.34 28.65 64 64 64h288c35.35 0 64-28.66 64-64v-96C416 334.3 401.7 320 384 320zM488 0H352c-12.94 0-24.62 7.797-29.56 19.75c-4.969 11.97-2.219 25.72 6.938 34.88L370.8 96L169.4 297.4c-12.5 12.5-12.5 32.75 0 45.25C175.6 348.9 183.8 352 192 352s16.38-3.125 22.62-9.375L416 141.3l41.38 41.38c9.156 9.141 22.88 11.84 34.88 6.938C504.2 184.6 512 172.9 512 160V24C512 10.74 501.3 0 488 0z">
+                            </path>
+                        </svg>
+                    </button>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

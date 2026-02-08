@@ -1,0 +1,128 @@
+<template>
+    <!-- Card Element -->
+    <div class={sectionClass} key={item.packageDeployTime}>
+        <div class="card-box">
+            <header class={cardHeader}>
+                <div title={item.packageName} class="text-truncate">{item.packageName}</div>
+                <!-- <svg role="button"
+                    viewBox="0 0 135.55 135.51" width="20px" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="m135.55 67.732c0 34.533-27.088 64.336-61.504 67.5-34.428 3.165-66.644-21.045-72.942-55.092-6.297-34.04 14.95-68.33 48.31-77.686 33.372-9.357 69.43 8.813 81.738 41.207 2.915 7.673 4.398 15.864 4.398 24.071"
+                        fill="#135301"></path>
+                    <g fill="#237b0b">
+                        <path
+                            d="m130.76 68.732c0 34.33-28.665 62.995-62.995 62.995-34.331 0-62.995-28.665-62.995-62.995 0-34.331 28.664-62.995 62.995-62.995 34.33 0 62.995 28.664 62.995 62.995">
+                        </path>
+                        <path
+                            d="m124.68 43.246c5.089 29.667-12.629 59.468-41.123 69.176-30.22 10.297-64.225-4.923-76.863-34.193 6.073 35.425 42.497 58.713 77.203 49.347 35.831-9.671 55.552-50.162 40.783-84.33">
+                        </path>
+                        <path
+                            d="m107.1 39.768c-8.712 1.802-18.743-10.54-26.297-13.679-14.114-5.867-31.741-3.143-44.526 4.846-13.523 8.449-23.141 24.68-24.622 40.611-4e-3 0.045006-5e-3 0.054001-2e-3 0.024002 0.999-9.647 0.325-18.717 3.999-28.043 6.087-15.458 19.253-27.563 35.127-32.426 16.41-5.027 34.356-1.828 48.495 7.753 4.364 2.96 21.169 18.151 7.826 20.914">
+                        </path>
+                    </g>
+                    <path
+                        d="m81.825 29.781c0 12.314-2.119 25.257-4.871 37.212-1.65 7.166-8.262 26.567-15.229 11.319-5.728-12.533-6.635-27.953-7.569-41.524-0.411-5.937-1.029-11.817 4.484-15.813 7.694-5.579 23.185-2.528 23.185 8.806"
+                        fill="#005ebc"></path>
+                    <path
+                        d="m79.002 30.239c0 10.673-1.894 21.807-3.911 32.247-0.73502 3.798-5.393 25.675-11.13 13.661-5.28-11.056-5.751-25.315-6.629-37.34-0.334-4.557-1.28-9.925 1.812-13.781 5.228-6.521 19.858-4.395 19.858 5.213"
+                        fill="#fff"></path>
+                    <path d="m81.093 105.85c0-17.25-26.751-17.248-26.751 0 0 17.25 26.751 17.252 26.751 0"
+                        fill="#005ab5"></path>
+                    <path d="m77.983 105.35c0-13.908-20.532-13.908-20.532 0s20.532 13.91 20.532 0" fill="#fff"></path>
+                </svg> -->
+                <template lwc:if={noPROD}>
+                    <lightning-button-menu icon-name="utility:info" variant="bare-inverse" size="large"
+                        class={envStatusClass}>
+                        <lightning-menu-subheader class="bg-dark bg-gradient text-light"
+                            label="Environment Gate Status"></lightning-menu-subheader>
+                        <c-dx-vis-env-gate-status status={item.status}></c-dx-vis-env-gate-status>
+                    </lightning-button-menu>
+                </template>
+            </header>
+            <div class="card-content">
+                <div class="py-1 dark-label">
+                    <p class="d-flex" title={item.Version}><strong class="lbl">Version:
+                        </strong><span class="text-truncate ps-1" style="max-width: 100px;">{item.Version}</span>
+                    </p>
+                </div>
+                <div class="py-1 dark-label">
+                    <p class="d-flex" title={item.Branch}><strong class="lbl">Branch:
+                        </strong><span title={item.Branch} class="text-truncate ps-1"
+                            style="max-width: 100px;">{item.Branch}</span>
+                    </p>
+                </div>
+                <div class="py-1 dark-label border-bottom-0">
+                    <p><strong class="lbl">Quality</strong></p>
+                    <div class="d-flex justify-content-center">
+                        <template lwc:if={summaryRiskMeter}>
+                            <c-dx-progress-utils meter-profile={meterProfile} meter-result={meterResult}
+                                meter-quality-type={meterQualityType} custom-meter={customMeter}></c-dx-progress-utils>
+                        </template>
+                        <template lwc:else>
+                            <div role="button" class="d-flex justify-content-between">
+                                <c-package-quality-score progress-value={item.codeQuality.consolidatedScore}
+                                    percentage={item.codeQuality.consolidatedScore}>
+                                </c-package-quality-score>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                <div class="slide border border-secondary rounded p-2 pt-3 px-0 mt-3">
+                    <span class="quality-details fst-italic badge bg-primary">Details</span>
+                    <div class="px-1">
+                        <div class="border-bottom border-secondary pb-1">
+                            <div class="d-flex justify-content-between pt-1">
+                                <div class="small fw-bold">Quality</div>
+                                <c-dx-progress-utils custom-grade={customGrade}
+                                    grade={item.codeQuality.detail.quality}></c-dx-progress-utils>
+                            </div>
+                        </div>
+                        <div class="border-bottom py-1 border-secondary">
+                            <div class="d-flex  justify-content-between">
+                                <div class="data-progress small fw-bold">Coverage</div>
+                                <c-dx-progress-utils custom-progress={customProgress}
+                                    percentage={item.codeQuality.detail.coverage}></c-dx-progress-utils>
+                            </div>
+                        </div>
+                        <div class="border-bottom py-1 border-secondary">
+                            <div class="d-flex  justify-content-between">
+                                <div class="data-progress small fw-bold">Automation</div>
+                                <c-dx-progress-utils custom-progress={customProgress}
+                                    percentage={item.codeQuality.detail.automation}></c-dx-progress-utils>
+                            </div>
+                        </div>
+                        <div class="py-1 border-bottom border-secondary">
+                            <div class="d-flex  justify-content-between">
+                                <div class="data-progress small fw-bold">Performance</div>
+                                <c-dx-progress-utils custom-progress={customProgress}
+                                    percentage={item.codeQuality.detail.performance}></c-dx-progress-utils>
+                            </div>
+                        </div>
+                        <div class="pt-1">
+                            <div class="d-flex justify-content-between pt-1">
+                                <div class="small fw-bold">Dependency</div>
+                                <c-dx-progress-utils custom-grade={customGrade}
+                                    grade={item.codeQuality.detail.dependency}></c-dx-progress-utils>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted d-flex justify-content-end">
+                <button type="button" data-id="" data-name="" onclick={handleModalClick} title="More Info"
+                    class="btn btn-secondary btn-sm" aria-label="More Info">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="up-right-from-square"
+                        class="svg-inline--fa fa-up-right-from-square fa-sm Icon_white" role="img"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path fill="currentColor"
+                            d="M384 320c-17.67 0-32 14.33-32 32v96H64V160h96c17.67 0 32-14.32 32-32s-14.33-32-32-32L64 96c-35.35 0-64 28.65-64 64V448c0 35.34 28.65 64 64 64h288c35.35 0 64-28.66 64-64v-96C416 334.3 401.7 320 384 320zM488 0H352c-12.94 0-24.62 7.797-29.56 19.75c-4.969 11.97-2.219 25.72 6.938 34.88L370.8 96L169.4 297.4c-12.5 12.5-12.5 32.75 0 45.25C175.6 348.9 183.8 352 192 352s16.38-3.125 22.62-9.375L416 141.3l41.38 41.38c9.156 9.141 22.88 11.84 34.88 6.938C504.2 184.6 512 172.9 512 160V24C512 10.74 501.3 0 488 0z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <!-- Card Element -->
+
+</template>

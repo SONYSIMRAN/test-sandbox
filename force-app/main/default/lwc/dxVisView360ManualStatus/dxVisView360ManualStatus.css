@@ -1,0 +1,13 @@
+.qa-tick {
+    color: green;
+}
+
+.qa-cross {
+    color: red;
+}
+
+.qa-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

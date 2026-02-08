@@ -1,0 +1,25 @@
+.date-range-picker {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* background-color: #f4f6f9; */
+    padding: 10px 20px;
+    /* border-radius: 8px; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.date-range-picker lightning-input {
+    width: 150px; /* Adjust as needed */
+    margin-right: 10px;
+}
+
+.apply-button {
+    margin-top: 20px;
+}
+
+.slds-datepicker {
+    z-index: 2; /* Ensure the calendar pop-up is above other elements */
+    background: #ffffff;
+    width: 50%
+}

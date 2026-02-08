@@ -1,0 +1,8 @@
+.graph,.node{cursor:pointer}
+.dropdown-container{margin-left:700px}
+.combo-box-container{margin-left:800px}
+.checkbox-dropdown-container{display:flex;justify-content:space-between}
+.slds-checkbox{border-color:#ffa726}
+.orange-checkbox .slds-checkbox_faux{border-color:#ffa726}
+.dependency-graph-box{min-height:300px}
+.dep-combobox{margin-top:-24px;margin-right:6px}

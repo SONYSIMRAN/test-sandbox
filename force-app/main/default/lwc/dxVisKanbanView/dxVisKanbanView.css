@@ -1,0 +1,43 @@
+/* Kanban View */
+.orange {
+    background-color: #fd7e14;
+    color: #343a40;
+}
+.lime-green {
+    background-color: #68d168;
+    color: #343a40;
+}
+.magenta {
+    background-color: #d105d1;
+    color: #fff;
+}
+.b-orange {
+    border: 1px solid #fd7e14;
+}
+.b-lime-green {
+    border: 1px solid #68d168;
+}
+.b-magenta {
+    border: 1px solid #d105d1;
+}
+.kanban-container {
+    margin: 1rem 0;
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+}
+.kanban-col {
+    width: 27vw;
+    border-radius: 4px;
+    background-color: #fff;
+}
+.kanban-header {
+    font-size: 1.25rem;
+    font-weight: 400;
+    padding: 0.25rem;
+}
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

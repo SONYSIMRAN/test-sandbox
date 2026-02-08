@@ -1,0 +1,143 @@
+<template>
+    <div class="row">
+        <!-- Left column -->
+        <div class="col-md-5">
+            <h5 class="border border-info p-2 rounded text-truncate" title={headerDescription}>{headerDescription}
+            </h5>
+            <div class="row">
+                <div class="col-md-12">
+                    <template if:true={qualityScoreDetailsLoader}>
+                        <c-dx-vis-loader></c-dx-vis-loader>
+                    </template>
+                    <template lwc:if={qualityScoreDetails}>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center pe-4">
+                                Code Quality:
+                                <c-dx-progress-utils custom-grade={customGrade}
+                                    grade={qualityScoreDetails.quality}></c-dx-progress-utils>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center pe-4">
+                                Code Coverage:
+                                <c-dx-progress-utils custom-progress={customProgress}
+                                    percentage={qualityScoreDetails.coverage}></c-dx-progress-utils>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center pe-4">
+                                Automation Score:
+                                <c-dx-progress-utils custom-progress={customProgress}
+                                    percentage={qualityScoreDetails.automation}></c-dx-progress-utils>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center pe-4">
+                                Performance Score:
+                                <c-dx-progress-utils custom-progress={customProgress}
+                                    percentage={qualityScoreDetails.performance}></c-dx-progress-utils>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center pe-4">
+                                Dependency:
+                                <c-dx-progress-utils custom-grade={customGrade}
+                                    grade={qualityScoreDetails.dependency}></c-dx-progress-utils>
+                            </li>
+                        </ul>
+                    </template>
+                    <template if:true={qualityScoreDetailsLoader}>
+                        <ul class="list-group my-3">
+                            <c-dx-vis-loader></c-dx-vis-loader>
+                        </ul>
+                    </template>
+                    <template lwc:if={deploymentFile}>
+                        <ul class="list-group my-3 custom-scroll overflow-auto" style="max-height: 300px;">
+                            <template for:each={deploymentFileObj} for:item="item">
+                                <li key={item.key}
+                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span class="small text-secondary">{item.key}</span>
+                                    <span class="fw-bold text-truncate mx-2" style="max-width: 50%;"
+                                        title={item.value}>{item.value}</span>
+                                </li>
+                            </template>
+                        </ul>
+                    </template>
+                    <!-- Package owners -->
+                    <h5 class="border border-info p-2 rounded">Package Owners</h5>
+                    <template if:true={packageManagerLoader}>
+                        <ul class="list-group my-3">
+                            <c-dx-vis-loader></c-dx-vis-loader>
+                        </ul>
+                    </template>
+                    <template lwc:if={deploymentFile}>
+                        <ul class="col-md-12 custom-scroll overflow-auto list-group">
+                            <li class="list-group-item custom-scroll overflow-auto" style="max-height: 350px;">
+                                <div class="row">
+                                    <template for:each={packageManager} for:item="item">
+                                        <div key={item.name} class="col-md-6">
+                                            <div class="card swiper-slide mb-2">
+                                                <div class="image-content">
+                                                    <span class="overlay"></span>
+                                                    <div class="card-image">
+                                                        <img src={userProfile} alt="" class="card-img">
+                                                    </div>
+                                                </div>
+                                                <div class="card-content">
+                                                    <h2 class="name text-truncate" title={item.name}>{item.name}</h2>
+                                                    <p class="description text-truncate" title={item.email}>{item.role}
+                                                    </p>
+                                                    <p class="description small text-truncate" title={item.email}>
+                                                        {item.email}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </li>
+                        </ul>
+                    </template>
+                    <!-- Package owners -->
+                </div>
+            </div>
+        </div>
+        <!-- Left column -->
+        <!-- right column -->
+        <div class="col-md-7">
+            <div class="d-flex d-flex justify-content-between border border-info py-1 px-2 rounded">
+                <h5>Metadata</h5>
+                <div>
+                    <!-- <select style="max-width: 200px;" class="form-select" aria-label="Default select example"
+                    onchange={handlePackageBSelect}>
+                    <template for:each={dependencyList} for:item="item">
+                        <option key={item.id} value={item.id}>{item.name}</option>
+                    </template>
+                </select> -->
+                    <lightning-combobox style="min-width: 160px; margin-top: -24px;" name="PackageDependencies"
+                        value={selectedDP} placeholder="Package Dependencies" options={dependencyList}
+                        onchange={handleDepFilterChange}></lightning-combobox>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <template if:true={metadataTypeListLoader}>
+                        <c-dx-vis-loader></c-dx-vis-loader>
+                    </template>
+                    <template lwc:if={metadataTypeList}>
+                        <template if:false={metadataTypeListLoader}>
+                            <lightning-accordion class="metadata-type my-2" onsectiontoggle={handleToggleSection}>
+                                <template for:each={metadataTypeList} for:item="item">
+                                    <lightning-accordion-section key={item.name} class="border" name={item.name} label={item.name}>
+                                        <ul class="list-inline overflow-auto custom-scroll" style="max-height: 300px;">
+                                            <template for:each={item.members} for:item="member">
+                                                <li key={member.id} class="list-inline-item" onclick={handleMemberClick}
+                                                data-member-name={member.name}
+                                                data-member-type={item.name}
+                                                data-member-id={member.id}>
+                                                    <span class="badge rounded-pill bg-primary pointer">{member.name}</span>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </lightning-accordion-section>
+                                </template>
+                            </lightning-accordion>
+                        </template>
+                    </template>
+                </div>
+            </div>
+        </div>
+        <!-- right column -->
+    </div>
+</template>

@@ -1,0 +1,96 @@
+.footer-section {
+    background: #151414;
+    position: relative;
+}
+.legend-card {
+    color: #a5a5a5;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    border: 1px solid #303030 !important;
+    min-height: 125px;
+}
+.legend-card .legend-title {
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 13px;
+}
+.legend-card .legend-scale ul {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+}
+.legend-card .legend-scale ul li {
+    display: block;
+    float: left;
+    width: 50px;
+    margin-bottom: 6px;
+    text-align: center;
+    font-size: 80%;
+    list-style: none;
+}
+.legend-card .legend-labels li span {
+    display: block;
+    float: left;
+    height: 28px;
+    width: 50px;
+    line-height: 28px;
+}
+.legend-card .legend-source {
+    font-size: 70%;
+    color: #999;
+    clear: both;
+}
+.legend-card a {
+    color: #777;
+}
+.legend-card .radial-progress {
+    float: none !important;
+    display: flex !important;
+    width: 2rem !important;
+    height: 2rem !important;
+    border-radius: 50%;
+    background: conic-gradient(red var(--progress), gray 0deg);
+    font-size: 0;
+    margin-left: 8px;
+}
+.legend-card .radial-progress::after {
+    content: '';
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 6px;
+    border-radius: 50%;
+    background: #052c65;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+}
+.legend-card .radial-pbsr-bg-green {
+    background: conic-gradient(#198754 var(--progress), #ced4da 0deg);
+}
+.legend-card .radial-pbsr-bg-orange-400 {
+    background: conic-gradient(#fd7e14 var(--progress), #ced4da 0deg);
+}
+.legend-card .radial-pbsr-bg-yellow {
+    background: conic-gradient(#ffc107 var(--progress), #ced4da 0deg);
+}
+.legend-card .radial-pbsr-bg-red {
+    background: conic-gradient(#dc3545 var(--progress), #ced4da 0deg);
+}
+.copyright-area {
+    background: #1c1c1c;
+    padding: 25px 0;
+}
+
+.copyright-text p {
+    margin: 0;
+    font-size: 14px;
+    color: #878787;
+}
+
+.copyright-text p a {
+    color: #cdaa2b;
+}

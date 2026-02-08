@@ -1,0 +1,17 @@
+<template>
+    <!-- SLDS Popover with Close Button -->
+    <section class="dx-release-info-popover" role="dialog">
+        <div class="risk-tooltip-arrow"></div>
+        <button class="slds-button slds-button_icon slds-popover__close slds-float_right" 
+        title="Close dialog" 
+        onclick={handleClose}>
+        <lightning-icon icon-name="utility:close" alternative-text="Close dialog" size="small"></lightning-icon>
+        <span class="slds-assistive-text">Close dialog</span>
+        </button>
+
+        <!-- Popover Body -->
+        <div class="slds-popover__body">
+            <p>Overall Risk: {overallRiskStatus}</p>
+        </div>
+    </section>
+</template>

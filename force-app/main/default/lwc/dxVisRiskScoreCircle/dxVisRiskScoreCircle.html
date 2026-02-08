@@ -1,0 +1,16 @@
+<template>
+    <template lwc:if={scoreValue}>
+        <template lwc:if={hoverEffect}>
+            <div class="pulshing-circle-box">
+                <div class={riskCircleEffect} style="animation-delay: -3s"></div>
+                <div class={riskCircleEffect} style="animation-delay: -2s"></div>
+                <div class={riskCircleEffect} style="animation-delay: -1s"></div>
+                <div class={riskCircleEffect} style="animation-delay: 0s"></div>
+                <div class={riskScoreClass}>{scoreValue}</div>
+            </div>
+        </template>
+        <template lwc:else>
+            <div class={riskScoreClass}>{scoreValue}</div>
+        </template>
+    </template>
+</template>

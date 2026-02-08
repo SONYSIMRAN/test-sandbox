@@ -1,0 +1,17 @@
+<template>
+    <lightning-modal-header class="bg-danger" label="Tests Failed!"></lightning-modal-header>
+    <lightning-modal-body>
+        <!-- Tabs section -->
+        <div class="alert alert-danger" role="alert">
+            <p><code>{content.errorMessage}</code></p>
+            <hr />
+            <p><code>{content.stackTrace}</code></p>
+            <hr />
+            <code>{content.errorId}</code>
+        </div>
+        <!-- Tabs section -->
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button label="OK" onclick={handleOkay}></lightning-button>
+    </lightning-modal-footer>
+</template>
